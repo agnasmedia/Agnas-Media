@@ -53,6 +53,7 @@ export const ShowreelVideo = forwardRef((props, forwardRef) => {
   const ref = useRef();
   const tl = useRef();
   const scroll = useScroll();
+  const mark = useRef()
 
   const [video] = useState(() => Object.assign(document.createElement('video'), { src: '/src/assets/showreel_preview.mp4', crossOrigin: 'Anonymous', loop: true, muted: true }))
   useEffect(() => void video.play(), [video])
@@ -96,6 +97,7 @@ export const ShowreelVideo = forwardRef((props, forwardRef) => {
         <planeGeometry />
         <meshBasicMaterial color="black" />
       </mesh>
+      
     </mesh>
   )
 })

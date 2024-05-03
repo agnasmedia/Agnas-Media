@@ -1,46 +1,82 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-function Marquee() {
+
+
+import { useEffect, useRef, useLayoutEffect } from 'react'
+import {
+  useScrollbar,
+  SmoothScrollbar,
+  useTracker,
+} from '@14islands/r3f-scroll-rig'
+
+import { motion, useMotionValue, useTransform } from 'framer-motion'
+// import lerp from '@14islands/lerp'
+
+import './App.css'
+import '@14islands/r3f-scroll-rig/css'
+
+/**
+ * Return a Framer Motion value bound to a tracker scrollState
+ * @param {Tracker} tracker scroll-rig tracker instance
+ * @param {string} prop scrollState prop to bind
+ */
+function useTrackerMotionValue(tracker, prop = 'progress') {
+  const progress = useMotionValue()
+  const { onScroll } = useScrollbar()
+
+  useLayoutEffect(() => {
+    // set initial progress
+    progress.set(tracker.scrollState[prop])
+  }, [progress, tracker, prop])
+
+  useEffect(() => {
+    // update progress on scroll
+    return onScroll(() => {
+      progress.set(tracker.scrollState[prop])
+    })
+  }, [tracker, progress, onScroll, prop])
+  return progress
+}
+
+
+function CSSMarquee({ children, reverse = false, duration = 30, style }) {
+  const track = useRef()
+  const tracker = useTracker(track)
+  const progress = useTrackerMotionValue(tracker)
+
+  const x = useTransform(progress, [0, 1], reverse ? ['-50vw', '50vw'] : ['50vw', '-50vw'], { clamp: false })
+
   return (
-  //  <div className='w-full py-10 text-white'>
-  //      <div className='text flex whitespace-nowrap '>
-
-  //        <motion.h1 initial={{x:"0"}} animate={{x:"-100%"}} transition={{ease:"linear", repeat: Infinity, duration:2.2}} className='text-[2rem] md:text-[5rem] text-gray-300 leading-none'> Showreel -</motion.h1>
-
-  //        <motion.h1 initial={{x:"0"}} animate={{x:"-100%"}} transition={{ease:"linear", repeat: Infinity, duration:2.2}} className='text-[2rem] md:text-[5rem] text-gray-300 leading-none'> Showreel -</motion.h1>
-
-  //        <motion.h1 initial={{x:"0"}} animate={{x:"-100%"}} transition={{ease:"linear", repeat: Infinity, duration:2.2}} className='text-[2rem] md:text-[5rem] text-gray-300 leading-none'> Showreel -</motion.h1>
-
-  //        <motion.h1 initial={{x:"0"}} animate={{x:"-100%"}} transition={{ease:"linear", repeat: Infinity, duration:2.2}} className='text-[2rem] md:text-[5rem] text-gray-300 leading-none'> Showreel -</motion.h1>
-        
-  //      </div>
-
-  //  </div>
-     
-//   <div className='w-full py-10 text-white overflow-hidden'>
-//     <div className='text flex'>
-
-//         <motion.h1 initial={{x:"0"}} animate={{x:"-50vw"}} transition={{ease:"linear", repeat: Infinity, duration: 6}} className='text-[2rem] md:text-[5rem] text-gray-300 leading-none whitespace-nowrap'> Showreel -</motion.h1>
-
-//         <motion.h1 initial={{x:"0"}} animate={{x:"-50vw"}} transition={{ease:"linear", repeat: Infinity, duration: 6}} className='text-[2rem] md:text-[5rem] text-gray-300 leading-none whitespace-nowrap'> Showreel -</motion.h1>
-
-//         <motion.h1 initial={{x:"0"}} animate={{x:"-50vw"}} transition={{ease:"linear", repeat: Infinity, duration: 6}} className='text-[2rem] md:text-[5rem] text-gray-300 leading-none whitespace-nowrap'> Showreel -</motion.h1>
-
-//         <motion.h1 initial={{x:"0"}} animate={{x:"-50vw"}} transition={{ease:"linear", repeat: Infinity, duration: 6}} className='text-[2rem] md:text-[5rem] text-gray-300 leading-none whitespace-nowrap'> Showreel -</motion.h1>
-        
-//     </div>
-// </div>
-
-<div className='w-full  text-white overflow-hidden'>
-    <motion.div initial={{x: "0%"}} animate={{x: "-50%"}} transition={{ease: "linear", repeat: Infinity, duration: 6}} className='text px-2 mr-2 flex flex-nowrap'>
-        <h1 className='text-[2rem] md:text-[5rem] text-gray-300 leading-none whitespace-nowrap'> Showreel -</h1>
-        <h1 className='text-[2rem] md:text-[5rem] text-gray-300 leading-none whitespace-nowrap'> Showreel -</h1>
-        <h1 className='text-[2rem] md:text-[5rem] text-gray-300 leading-none whitespace-nowrap'> Showreel -</h1>
-        <h1 className='text-[2rem] md:text-[5rem] text-gray-300 leading-none whitespace-nowrap'> Showreel -</h1>
-    </motion.div>
-</div>
-
+    <div className="marqueeWrapper" ref={track}>
+      <div style={style}>
+        <motion.div className={'marquee ' + (reverse ? 'reverse' : '')} style={{ x }}>
+          <div className="marquee__content" style={{ '--duration': `${duration}s` }}>
+            <h2>{children}</h2>
+          </div>
+          <div className="marquee__content" style={{ '--duration': `${duration}s` }} aria-hidden="true">
+            <h2>{children}</h2>
+          </div>
+        </motion.div>
+      </div>
+    </div>
   )
 }
 
-export default Marquee
+
+
+const Row = ({ children }) => <div className="row">{children}</div>
+
+export default function Marquee() {
+  return (
+    <>
+    
+      <SmoothScrollbar>
+        {(bind) => (
+          <article {...bind}>
+            <CSSMarquee style={{ transform: 'rotateZ(3deg)' }}>Showreel-Showreel-Showreel-Showreel-Showreel-Showreel-Showreel-Showreel- </CSSMarquee>
+          </article>
+        )}
+      </SmoothScrollbar>
+    </>
+  )
+}
