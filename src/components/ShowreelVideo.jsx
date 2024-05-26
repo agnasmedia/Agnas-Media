@@ -53,10 +53,10 @@ export const ShowreelVideo = forwardRef((props, forwardRef) => {
   
   return (
     <group ref={ref} rotation={[-0.12, -Math.PI, 0]} position={[0, 0.5, -20]}>
-      <mesh scale={[16.05, 10.05, 1]} position={[0, 0, 0.8]} onClick={()=>{window.open("https://www.youtube.com/watch?v=4k1ty5U4Hi4")}}>
-          <circleGeometry args={[0.08, 32, 0, 6.283185307179586]} />
+      <mesh scale={10} position={[0, 0, 0.2]} onClick={()=>{window.open("https://www.youtube.com/watch?v=4k1ty5U4Hi4")}}>
+          <circleGeometry args={[0.08, 42]} />
           <meshBasicMaterial color="#c24040" />
-          <Text scale={0.01} position={[0, 0, 0.7]}>
+          <Text scale={0.02} position={[0, 0, 0.01]}>
             Full Video
           </Text>
         </mesh>

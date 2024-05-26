@@ -209,7 +209,7 @@ export function LandingPageContent() {
             <div style={{display: 'flex', width: '90%', justifyContent: 'space-between', marginTop: '0.5em', marginBottom: '0.5em'}}><div>Ecommerce of the year </div>  <div>05</div></div>
             <div style={{display: 'flex', width: '90%', justifyContent: 'space-between', marginTop: '0.5em', marginBottom: '0.5em'}}><div>Mobile of the Week</div>  <div>01</div></div>
        </div>
-       <div className="marquee" style={{ width: "100%", position: 'absolute', top: `1949vh`, transform: `translate3d(0,-100%,0)`, color:'white', fontSize: '4em', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+       <div className="marquee" style={{ width: "100%", position: 'absolute', top: `1946vh`, transform: `translate3d(0,-100%,0)`, color:'white', fontSize: '4em', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Marquee first={"Contact Us"} second={"Let's Talk"}/>
         </div>
        <div style={{width:'100%',position: 'absolute', padding:'1vw', display:'flex', gap:'2vw', top:'2000vh',transform: `translate3d(0,-100%,0)`, color:'white', fontSize:'0.5vw', lineHeight:'1vw' }}>

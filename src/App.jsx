@@ -31,7 +31,7 @@ function App() {
               <EffectComposer>
                       <Fluid
                           radius={0.5}
-                          curl={1.9}
+                          curl={4.9}
                           swirl={4}
                           distortion={0.40}
                           force={1.1}
