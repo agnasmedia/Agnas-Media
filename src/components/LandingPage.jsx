@@ -46,7 +46,7 @@ function LandingPage() {
     })
   }
 
-  const minHeight = 2280
+  const minHeight = 1200
 
 
   return (

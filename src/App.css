@@ -213,8 +213,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 130vh;
-    padding-bottom: 400vh;
+    padding-top: 120vh;
     float: left;
     height: 100vh;
 }
@@ -356,6 +355,7 @@
     margin-top: 0;
     padding-top: 0;
     padding-bottom: 0;
+    height: 50vh;
 }
 
 .marquee.contact{
@@ -408,16 +408,14 @@
 }
 
 .home-section-3{
-    height: 150vh;
     display: block;
     float: left;
-    padding-top: 150vh;
     width: 100%;
+    padding: 20vh 0;
 }
 
 
 .home-section-4{
-    height: 150vh;
     display: block;
     float: left;
     padding: 20vh 0;
@@ -428,7 +426,6 @@
 .home-section-5{
     display: block;
     float: left;
-    height: 150vh;
     padding: 20vh 0;
     width: 100%;
 }
@@ -436,14 +433,12 @@
 .home-section-6{
     display: block;
     float: left;
-    height: 420vh;
     width: 100%;
 }
 
 .home-section-7{
     display: block;
     float:left;
-    height: 250vh;
     width: 100%;
     width: 100%;
 }
