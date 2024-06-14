@@ -35,9 +35,12 @@ function LandingPage() {
   
     return windowDimensions;
   }
-  
+``  
+  // const pixelWidth = window.screen.availWidth
+  // const pixelHeight = window.screen.availHeight
+  // console.log("Pixel width and height: ", pixelWidth, pixelHeight)
   const { width, height } = useWindowDimensions();
-  console.log(width ,height, Math.floor(height/100)+1)
+  // console.log(width ,height, Math.floor(height/100)+1)
 
   if (width>500){
     useFrame((state, delta) => {
@@ -46,7 +49,16 @@ function LandingPage() {
     })
   }
 
-  const minHeight = 1200
+  let minHeight = 0
+  if (width>=1750){
+    minHeight = 1200
+  }else if(width >= 1020 && width<1750){
+    minHeight = 1580
+  }else if(width>=420 && width<1020){
+    minHeight= 1530
+  }else if(width>=200 && width<420){
+    minHeight = 1590
+  }
 
 
   return (

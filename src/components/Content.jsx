@@ -269,34 +269,34 @@ export function LandingPageContent() {
         </div>
        <div className="footer-wrap">
             <div style={{width:'20%', marginLeft:'1.3vw' }}>
-               <h1>Heroes from Ukraine</h1>
+               <h1>Agnas Media US</h1>
                <h1>Main Office</h1>
-               <h1>Dnipro, 49000</h1>
-               <h1>hello@agnasmedia.team</h1>
+               <h1>New York City, 10016</h1>
+               <h1><a href="mailto:howdy@agnasmedia.com">EMAIL</a></h1>
             </div>
             <div style={{width:'20%', }}>
-               <h1>Based in USA</h1>
-               <h1>Los Angeles, 90210</h1>
-               <h1>California</h1>
-               <h1>la@agnasmedia.team</h1>
+               <h1>Agnas Media India</h1>
+               <h1>Chandigarh, 160001</h1>
+               <h1>Punjab, India</h1>
+               <h1><a href="mailto:howdy@agnasmedia.com">EMAIL</a></h1>
             </div>
-            <div style={{width:'20%', }}>
+            {/* <div style={{width:'20%', }}>
                <h1>Support from Poland </h1>
                <h1>Los Angeles, 90210</h1>
                <h1>California</h1>
-               <h1>la@agnasmedia.team</h1>
-            </div>
+               <h1><a href="mailto:howdy@agnasmedia.com">EMAIL</a></h1>
+            </div> */}
             <div style={{width:'20%', paddingLeft:'2.5vw', marginLeft:'2vw' }}>
-              <h1>Facebook</h1>
-              <h1>Instagram</h1>
-              <h1>Dribble</h1>
-              <h1>Behance</h1>
+              <h1><a href="https://www.instagram.com/agnasmedia">Instagram</a></h1>
+              <h1><a href="https://www.facebook.com/agnasmedia/">Facebook</a></h1>
+              <h1><a href="https://www.dribbble.com/agnasmedia/">Dribble</a></h1>
+              <h1><a href="https://www.behance.net/agnasmedia">Behance</a></h1>
             </div>
             <div style={{width:'20%', marginRight:'2vw' }}>
               <h1>Business inquiries</h1>
-              <h1>hello@agnasmedia.com</h1>
-              <h1>agnasmedia</h1>
-              <h1>agnasmedia</h1>
+              <h1>howdy@agnasmedia.com</h1>
+              <h1>Internationa: +1 917.259.1089</h1>
+              <h1>Asia: +91 999.657.1995</h1>
             </div>
        </div>
         
