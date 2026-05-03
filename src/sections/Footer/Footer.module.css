@@ -14,14 +14,35 @@
   opacity: 0;
 }
 
-.marquee {
-  margin-bottom: clamp(3rem, 8vh, 6rem);
+/* Marquee + Let's Talk: share one vertical band so text aligns with the button center */
+.ctaBand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: clamp(11rem, 28vw, 18rem);
+  margin-bottom: clamp(4rem, 12vh, 8rem);
 }
 
-.ctaRow {
+.marqueeLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ctaLayer {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
-  margin-bottom: clamp(4rem, 12vh, 8rem);
+  align-items: center;
+  pointer-events: auto;
 }
 
 .magnetic {

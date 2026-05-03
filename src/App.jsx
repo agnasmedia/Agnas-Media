@@ -77,7 +77,6 @@ export default function App() {
         <Services />
         <Mission
           id="beliefs"
-          reverse
           quote={
             <>
               We believe that the power of design, creativity, and emotion helps large and middle businesses to

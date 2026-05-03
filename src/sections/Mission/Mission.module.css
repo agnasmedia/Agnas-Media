@@ -2,22 +2,14 @@
   padding: clamp(4rem, 12vh, 9rem) clamp(1rem, 6vw, 6rem);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 6vw, 5rem);
-  align-items: start;
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2.5rem, 6vh, 4rem);
   max-width: 1400px;
   margin: 0 auto;
-}
-
-.reverse .grid {
-  direction: rtl;
-}
-
-.reverse .quote,
-.reverse .side {
-  direction: ltr;
+  text-align: center;
 }
 
 .quote {
@@ -25,14 +17,21 @@
   font-size: clamp(1.75rem, 3.5vw, 3.6rem);
   font-weight: 500;
   line-height: 1.15;
-  max-width: 18ch;
+  max-width: min(38ch, 100%);
+  text-align: center;
+  text-wrap: balance;
 }
 
-.side {
+.bottom {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: flex-start;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .magnetic {
@@ -66,8 +65,10 @@
 }
 
 .copy {
-  flex: 1;
+  flex: 0 1 auto;
+  min-width: min(100%, 280px);
   max-width: 520px;
+  text-align: center;
 }
 
 .body {
@@ -75,6 +76,8 @@
   font-size: clamp(1rem, 1.25vw, 1.3rem);
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  text-wrap: pretty;
 }
 
 .link {
@@ -84,19 +87,12 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
   color: var(--fg);
+  text-align: center;
 }
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .reverse .grid {
-    direction: ltr;
-  }
-
-  .side {
+@media (max-width: 600px) {
+  .bottom {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 }

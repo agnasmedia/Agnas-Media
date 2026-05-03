@@ -9,12 +9,15 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px;
-  height: 8px;
-  margin: -4px 0 0 -4px;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
   border-radius: 50%;
-  background: var(--fg);
-  mix-blend-mode: difference;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.35),
+    0 2px 8px rgba(0, 0, 0, 0.35);
   transform-origin: center center;
 }
 

@@ -82,20 +82,21 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
     <footer ref={rootRef} className={styles.footer} id="contact">
       <span ref={sentinalRef} className={styles.sentinal} aria-hidden />
 
-      <div className={styles.marquee}>
-        <MarqueeStrip first="Let's talk" second="Contact us" />
-      </div>
-
-      <div className={styles.ctaRow}>
-        <MagneticButton className={styles.magnetic}>
-          <a
-            className={styles.talkBtn}
-            href="mailto:hello@advanced.team"
-            data-cursor-text="Say hello"
-          >
-            Let&apos;s Talk
-          </a>
-        </MagneticButton>
+      <div className={styles.ctaBand}>
+        <div className={styles.marqueeLayer} aria-hidden>
+          <MarqueeStrip first="Let's talk" second="Contact us" />
+        </div>
+        <div className={styles.ctaLayer}>
+          <MagneticButton className={styles.magnetic}>
+            <a
+              className={styles.talkBtn}
+              href="mailto:hello@advanced.team"
+              data-cursor-text="Say hello"
+            >
+              Let&apos;s Talk
+            </a>
+          </MagneticButton>
+        </div>
       </div>
 
       <div className={styles.grid}>
@@ -134,7 +135,6 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
           <p className={styles.note}>advanced.team</p>
         </div>
       </div>
-
     </footer>
   )
 }

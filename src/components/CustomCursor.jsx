@@ -3,13 +3,12 @@ import gsap from 'gsap'
 import styles from './CustomCursor.module.css'
 
 /**
- * Advanced.team–style cursor: dot + optional label on hover (`data-cursor-text`).
+ * Dot follows pointer everywhere; optional label on `data-cursor-text` hover.
  */
 export function CustomCursor() {
   const dotRef = useRef(null)
   const labelRef = useRef(null)
   const [label, setLabel] = useState('')
-  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const mqFine = window.matchMedia('(pointer: fine)')
@@ -60,24 +59,17 @@ export function CustomCursor() {
     document.addEventListener('mouseover', onOver)
     document.addEventListener('mouseout', onOut)
 
-    const show = () => setVisible(true)
-    const hide = () => setVisible(false)
-    window.addEventListener('pointerenter', show)
-    window.addEventListener('pointerleave', hide)
-
     return () => {
       document.body.classList.remove('hide-cursor')
       window.removeEventListener('pointermove', move)
       document.removeEventListener('mouseover', onOver)
       document.removeEventListener('mouseout', onOut)
-      window.removeEventListener('pointerenter', show)
-      window.removeEventListener('pointerleave', hide)
     }
   }, [])
 
   return (
     <div className={styles.root} aria-hidden data-cursor-root>
-      <div ref={dotRef} className={styles.dot} style={{ opacity: visible ? 1 : 0 }} />
+      <div ref={dotRef} className={styles.dot} />
       <div
         ref={labelRef}
         className={styles.label}

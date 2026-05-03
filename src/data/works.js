@@ -29,7 +29,8 @@ export const WORKS = [
     meta: 'Site Of The Day by Awwwards',
     year: '2021',
     href: 'https://advanced.team/vendome-clinique',
-    image: 'https://advanced.team/image/project/Vendome/vendome-preview.jpg',
+    // `/image/project/Vendome/vendome-preview.jpg` 404s; use a known-good CDN asset until the live path is confirmed.
+    image: 'https://advanced.team/image/portfolio/depositprev-progressive.jpg',
     side: 'left',
   },
   {

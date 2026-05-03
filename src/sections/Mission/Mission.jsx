@@ -7,14 +7,7 @@ import styles from './Mission.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export function Mission({
-  id,
-  quote,
-  aside,
-  linkHref,
-  linkLabel,
-  reverse = false,
-}) {
+export function Mission({ id, quote, aside, linkHref, linkLabel }) {
   const rootRef = useRef(null)
 
   useGSAP(
@@ -42,13 +35,13 @@ export function Mission({
   )
 
   return (
-    <section ref={rootRef} className={`${styles.section} ${reverse ? styles.reverse : ''}`} id={id}>
-      <div className={styles.grid}>
+    <section ref={rootRef} className={styles.section} id={id}>
+      <div className={styles.inner}>
         <blockquote data-animate className={styles.quote}>
           {quote}
         </blockquote>
 
-        <div data-animate className={styles.side}>
+        <div data-animate className={styles.bottom}>
           <MagneticButton className={styles.magnetic}>
             <a
               className={styles.circleBtn}
