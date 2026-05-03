@@ -14,21 +14,28 @@
 .grid {
   max-width: 1400px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  justify-items: center;
+}
+
+.column {
   display: flex;
   flex-direction: column;
-  gap: clamp(4rem, 12vh, 8rem);
+  align-items: center;
+  width: 100%;
+  max-width: min(100%, 300px);
+  padding-top: clamp(3.5rem, 8.4vh, 7rem);
+  padding-bottom: clamp(3.5rem, 8.4vh, 7rem);
+  box-sizing: border-box;
 }
 
 .card {
-  width: min(92vw, 640px);
-}
-
-.left {
-  align-self: flex-start;
-}
-
-.right {
-  align-self: flex-end;
+  width: 100%;
+  max-width: min(88vw, 300px);
+  order: var(--order);
 }
 
 .cardLink {
@@ -44,9 +51,21 @@
 }
 
 .thumb {
-  height: min(70vh, 520px);
   overflow: hidden;
   background: #111;
+}
+
+/* Slightly different heights per track so card tops/bottoms don’t line up across columns. */
+.track0 .thumb {
+  height: min(49vh, 384px);
+}
+
+.track1 .thumb {
+  height: min(54vh, 418px);
+}
+
+.track2 .thumb {
+  height: min(51vh, 396px);
 }
 
 .img {
@@ -61,7 +80,7 @@
 
 .title {
   margin: 0 0 0.35rem;
-  font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+  font-size: clamp(1.35rem, 3vw, 2.2rem);
   font-weight: 500;
 }
 
@@ -71,7 +90,7 @@
   align-items: baseline;
   gap: 1rem;
   margin: 0;
-  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
   color: rgba(255, 255, 255, 0.72);
 }
 
@@ -80,18 +99,40 @@
   color: rgba(255, 255, 255, 0.55);
 }
 
-@media (max-width: 768px) {
-  .card {
-    width: 100%;
+@media (max-width: 960px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(2.5rem, 8vh, 4rem);
   }
 
-  .left,
-  .right {
-    align-self: stretch;
+  .column {
+    display: contents;
+    max-width: none;
+  }
+
+  .card {
+    max-width: none;
+    margin-top: 0 !important;
   }
 
   .cardLink:hover,
   .cardLink:focus-visible {
     transform: none;
+  }
+
+  .track0 .thumb,
+  .track1 .thumb,
+  .track2 .thumb {
+    height: min(62vh, 480px);
+  }
+
+  .title {
+    font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+  }
+
+  .sub {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
   }
 }
