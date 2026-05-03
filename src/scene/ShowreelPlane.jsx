@@ -66,8 +66,13 @@ export function ShowreelPlane({ progress }) {
     obj.position.set(0, posY, posZ)
   })
 
+  // Stay completely hidden until the hero section has been scrolled past and the
+  // showreel ScrollTrigger starts driving progress > 0. This prevents any edge-on
+  // sliver of the plane (or its black backing) from showing through the A-logo.
+  const visible = progress > 0 && progress < 1
+
   return (
-    <group ref={ref} position={[0, 0, -16]} rotation={[0, -Math.PI / 2, 0]}>
+    <group ref={ref} position={[0, 0, -16]} rotation={[0, -Math.PI / 2, 0]} visible={visible}>
       <mesh>
         <planeGeometry args={[16, 9]} />
         <meshBasicMaterial toneMapped={false}>

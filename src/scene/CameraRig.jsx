@@ -11,10 +11,10 @@ export function CameraRig() {
 
   useFrame(() => {
     const wide = typeof window !== 'undefined' && window.innerWidth > 900
-    const sx = wide ? pointer.x * 0.6 : 0
-    const sy = wide ? pointer.y * 0.3 : 0
+    const sx = wide ? pointer.x * 1.4 : pointer.x * 0.5
+    const sy = wide ? pointer.y * 0.7 : pointer.y * 0.25
     target.current.set(sx, BASE.y + sy, BASE.z)
-    camera.position.lerp(target.current, 0.06)
+    camera.position.lerp(target.current, 0.09)
     camera.lookAt(0, 0, 0)
   })
 

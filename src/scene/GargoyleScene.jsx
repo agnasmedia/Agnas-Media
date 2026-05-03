@@ -34,8 +34,13 @@ export function GargoyleScene({ progress }) {
     root.current.position.set(0, y, -1)
   })
 
+  // Stay hidden until the CTA band's ScrollTrigger starts driving progress > 0.
+  // Without this gate the gargoyle (scale=20) can peek into the bottom of the
+  // viewport from earlier sections like Awards/Works once it has been mounted.
+  const visible = progress > 0
+
   return (
-    <group ref={root}>
+    <group ref={root} visible={visible}>
       <group scale={20} rotation={[0, -1.55, 0]} position={[0, 0.5, 0]}>
         <Center>
           <GargoyleMesh />
