@@ -1,0 +1,86 @@
+.section {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.marquee {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-58%);
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  color: #fff;
+}
+
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 4rem 1rem;
+}
+
+.videoInner {
+  position: relative;
+  width: min(92vw, 72rem);
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  transform-origin: center center;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.55);
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.magnetic {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.fullBtn {
+  pointer-events: auto;
+  width: clamp(5rem, 12vw, 12rem);
+  height: clamp(5rem, 12vw, 12rem);
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.fullBtn:hover,
+.fullBtn:focus-visible {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.fullBtnLabel {
+  font-size: clamp(0.65rem, 1.2vw, 1rem);
+  font-weight: 500;
+  text-align: center;
+  max-width: 70%;
+  line-height: 1.2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .videoInner {
+    transform: none !important;
+    border-radius: 0 !important;
+  }
+}

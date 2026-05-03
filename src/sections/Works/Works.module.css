@@ -1,0 +1,97 @@
+.section {
+  padding: clamp(4rem, 12vh, 8rem) clamp(1rem, 5vw, 4rem) clamp(6rem, 16vh, 12rem);
+}
+
+.heading {
+  margin: 0 auto clamp(3rem, 8vh, 6rem);
+  text-align: center;
+  font-size: clamp(2.5rem, 9vw, 10.3rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 12vh, 8rem);
+}
+
+.card {
+  width: min(92vw, 640px);
+}
+
+.left {
+  align-self: flex-start;
+}
+
+.right {
+  align-self: flex-end;
+}
+
+.cardLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardLink:hover,
+.cardLink:focus-visible {
+  transform: translateY(-26px);
+}
+
+.thumb {
+  height: min(70vh, 520px);
+  overflow: hidden;
+  background: #111;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.meta {
+  padding: 1rem 0.25rem 0;
+}
+
+.title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+  font-weight: 500;
+}
+
+.sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.year {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+
+  .left,
+  .right {
+    align-self: stretch;
+  }
+
+  .cardLink:hover,
+  .cardLink:focus-visible {
+    transform: none;
+  }
+}

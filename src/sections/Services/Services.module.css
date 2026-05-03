@@ -1,0 +1,33 @@
+.section {
+  padding: clamp(4rem, 14vh, 10rem) clamp(1rem, 6vw, 6rem);
+}
+
+.inner {
+  max-width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.label {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1rem, 1.25vw, 1.25rem);
+  font-weight: 400;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.line {
+  font-size: clamp(2.8rem, 9vw, 7rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.line + .line {
+  margin-top: 0.12em;
+}

@@ -1,0 +1,76 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(1rem, 4vw, 2rem) clamp(1rem, 4vw, 3rem) clamp(4rem, 12vh, 8rem);
+}
+
+.nav {
+  position: absolute;
+  top: clamp(2rem, 8vh, 5rem);
+  right: clamp(1rem, 4vw, 4rem);
+  display: flex;
+  gap: clamp(1rem, 3vw, 3rem);
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  font-weight: 500;
+}
+
+.navLink {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--fg);
+}
+
+.title {
+  margin: 0;
+  padding-top: clamp(2rem, 6vh, 4rem);
+  max-width: min(92vw, 1100px);
+}
+
+.line {
+  display: block;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: 0.02em;
+}
+
+.reg {
+  font-size: 0.35em;
+  font-weight: 300;
+  vertical-align: super;
+}
+
+.intro {
+  position: absolute;
+  left: clamp(1rem, 11vw, 14vw);
+  bottom: clamp(5rem, 14vh, 10rem);
+  max-width: min(640px, 85vw);
+  margin: 0;
+  font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+  line-height: 1.75;
+  color: var(--fg);
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    position: relative;
+    top: auto;
+    right: auto;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+  }
+
+  .intro {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    margin-top: 3rem;
+  }
+}
