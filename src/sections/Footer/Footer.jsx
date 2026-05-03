@@ -13,25 +13,25 @@ const CONTACT = [
   {
     heading: 'Heroes from Ukraine',
     lines: ['Main Office', 'Dnipro, 49000'],
-    mail: 'hello@advanced.team',
+    mail: 'hello@agnasmedia.com',
   },
   {
     heading: 'Based in USA',
     lines: ['Los Angeles, 90210', 'California'],
-    mail: 'la@advanced.team',
+    mail: 'la@agnasmedia.com',
   },
   {
     heading: 'Support from Poland',
     lines: ['Main Office', 'Warsaw'],
-    mail: 'pl@advanced.team',
+    mail: 'pl@agnasmedia.com',
   },
 ]
 
 const SOCIAL = [
-  { label: 'Facebook', href: 'https://www.facebook.com/advanced.team/' },
-  { label: 'Instagram', href: 'https://www.instagram.com/advanced.team/' },
-  { label: 'Dribbble', href: 'https://dribbble.com/advanced-team' },
-  { label: 'Behance', href: 'https://www.behance.net/advanced_team' },
+  { label: 'Facebook', href: 'https://www.facebook.com/agnasmedia.com/' },
+  { label: 'Instagram', href: 'https://www.instagram.com/agnasmedia.com/' },
+  { label: 'Dribbble', href: 'https://dribbble.com/agnasmedia' },
+  { label: 'Behance', href: 'https://www.behance.net/agnasmedia' },
 ]
 
 export function Footer({ onFooterProgress, onRequestFooterModel }) {
@@ -93,7 +93,7 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
           <MagneticButton className={styles.magnetic}>
             <a
               className={styles.talkBtn}
-              href="mailto:hello@advanced.team"
+              href="mailto:hello@agnasmedia.com"
               data-cursor-text="Say hello"
             >
               Let&apos;s Talk
@@ -132,10 +132,10 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
 
         <div className={styles.col}>
           <p className={styles.colHead}>Business inquiries</p>
-          <a className={styles.mail} href="mailto:hello@advanced.team">
-            hello@advanced.team
+          <a className={styles.mail} href="mailto:hello@agnasmedia.com">
+            hello@agnasmedia.com
           </a>
-          <p className={styles.note}>advanced.team</p>
+          <p className={styles.note}>agnasmedia.com</p>
         </div>
       </div>
     </footer>

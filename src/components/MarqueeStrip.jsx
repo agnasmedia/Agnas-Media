@@ -1,7 +1,7 @@
 import styles from './MarqueeStrip.module.css'
 
 /**
- * Horizontal infinite marquee (Showreel, Awards, Contact) — advanced.team style.
+ * Horizontal infinite marquee (Showreel, Awards, Contact) — Agnas Media style.
  */
 export function MarqueeStrip({ first, second, className = '' }) {
   const text = `${first} — ${second} — `

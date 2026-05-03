@@ -54,7 +54,7 @@ export function Hero({ onHeroProgress }) {
 
       <h1 className={styles.title}>
         <span data-hero-line className={styles.line}>
-          Advanced Team <sup className={styles.reg}>®</sup>
+          Agnas Media <sup className={styles.reg}>®</sup>
         </span>
         <span data-hero-line className={styles.line}>
           Digital Design

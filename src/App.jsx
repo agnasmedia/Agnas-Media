@@ -72,12 +72,12 @@ export default function App() {
           id="mission"
           quote={
             <>
-              Every project made by advanced team is created at the intersection between design and technology,
+              Every project made by Agnas Media is created at the intersection between design and technology,
               making the future — today
             </>
           }
           aside="With over 200 projects completed, our team has gained a comprehensive understanding of user behavior patterns. This knowledge allows us to provide our clients with efficient and effective solutions to their digital challenges. By leveraging our experience, we are able to achieve maximum efficiency in solving client problems and delivering successful outcomes."
-          linkHref="https://advanced.team/team"
+          linkHref="https://agnasmedia.com/team"
           linkLabel="Read more about us"
         />
         <Services />
@@ -90,7 +90,7 @@ export default function App() {
             </>
           }
           aside="We keep looking towards the future, at the same time recognizing that behavior change takes place only with a clear awareness of the current state. Before we get down to the design, our team conducts a thorough audit of how your audience feels. Then we implement an emotional solution, attracting Customers to make a click. In this way, you stay unique today and will be of current interest no matter what awaits you in the future."
-          linkHref="https://advanced.team/ru/services"
+          linkHref="https://agnasmedia.com/ru/services"
           linkLabel="Read more about our services"
         />
         <Works />
