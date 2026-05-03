@@ -24,7 +24,7 @@
   justify-content: center;
   width: 100%;
   min-height: clamp(11rem, 28vw, 18rem);
-  margin-top: clamp(3rem, 12vh, 7rem);
+  margin-top: clamp(3rem, 10vh, 7rem);
   margin-bottom: clamp(4rem, 12vh, 8rem);
 }
 
