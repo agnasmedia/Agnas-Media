@@ -19,12 +19,17 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
   const [heroProgress, setHeroProgress] = useState(0)
+  const [showreelProgress, setShowreelProgress] = useState(0)
   const [footerProgress, setFooterProgress] = useState(0)
   const [mountFooterModel, setMountFooterModel] = useState(false)
   const [sceneReady, setSceneReady] = useState(false)
 
   const onHeroProgress = useCallback((v) => {
     setHeroProgress(v)
+  }, [])
+
+  const onShowreelProgress = useCallback((v) => {
+    setShowreelProgress(v)
   }, [])
 
   const onFooterProgress = useCallback((v) => {
@@ -55,13 +60,14 @@ export default function App() {
       ) : null}
       <SceneCanvas
         heroProgress={heroProgress}
+        showreelProgress={showreelProgress}
         footerProgress={footerProgress}
         mountFooterModel={mountFooterModel}
         onSceneReady={onSceneReady}
       />
       <div className={`mainSurface ${styles.main}`}>
         <Hero onHeroProgress={onHeroProgress} />
-        <Showreel />
+        <Showreel onShowreelProgress={onShowreelProgress} />
         <Mission
           id="mission"
           quote={

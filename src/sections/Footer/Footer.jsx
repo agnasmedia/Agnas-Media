@@ -37,6 +37,7 @@ const SOCIAL = [
 export function Footer({ onFooterProgress, onRequestFooterModel }) {
   const rootRef = useRef(null)
   const sentinalRef = useRef(null)
+  const ctaBandRef = useRef(null)
 
   useEffect(() => {
     const el = sentinalRef.current
@@ -59,12 +60,14 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
 
   useGSAP(
     () => {
-      if (!rootRef.current) return undefined
+      if (!ctaBandRef.current) return undefined
 
+      // Trigger off the CTA band itself so progress=0.5 corresponds to the
+      // "Let's Talk" button being at the vertical center of the viewport.
       const st = ScrollTrigger.create({
-        trigger: rootRef.current,
+        trigger: ctaBandRef.current,
         start: 'top bottom',
-        end: 'bottom bottom',
+        end: 'bottom top',
         scrub: true,
         onUpdate: (self) => {
           onFooterProgress?.(self.progress)
@@ -82,7 +85,7 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
     <footer ref={rootRef} className={styles.footer} id="contact">
       <span ref={sentinalRef} className={styles.sentinal} aria-hidden />
 
-      <div className={styles.ctaBand}>
+      <div ref={ctaBandRef} className={styles.ctaBand}>
         <div className={styles.marqueeLayer} aria-hidden>
           <MarqueeStrip first="Let's talk" second="Contact us" />
         </div>

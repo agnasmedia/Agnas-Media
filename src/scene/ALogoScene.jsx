@@ -1,38 +1,34 @@
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import * as THREE from 'three'
+import { Center } from '@react-three/drei'
 import { ALogoMesh } from '../r3f/ALogoModel'
 
-const ROT_X = (89.5 * Math.PI) / 180
+const ROT_X = Math.PI / 2
 
-/** Hero “A” logo — z-depth driven by scroll progress (legacy ~0→80). */
+/**
+ * Hero "A" logo. Pivot is auto-centered, then scaled to fit the viewport,
+ * then translated along Z to fly past the camera as the hero scrolls.
+ */
 export function ALogoScene({ progress }) {
   const group = useRef()
-  const { pointer } = useThree()
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!group.current) return
-    const z = THREE.MathUtils.lerp(0, 80, progress)
-    group.current.position.set(0, -6, z)
-
-    const cam = state.camera
-    const wide = typeof window !== 'undefined' && window.innerWidth > 900
-    if (wide) {
-      const tx = pointer.x * 1.4
-      const ty = pointer.y * 0.7 + 1.5
-      cam.position.x = THREE.MathUtils.lerp(cam.position.x, tx, 0.045)
-      cam.position.y = THREE.MathUtils.lerp(cam.position.y, ty, 0.045)
-      cam.lookAt(0, 0, 0)
-    } else {
-      cam.position.x = THREE.MathUtils.lerp(cam.position.x, 0, 0.12)
-      cam.position.y = THREE.MathUtils.lerp(cam.position.y, 1.5, 0.12)
-      cam.lookAt(0, 0, 0)
-    }
+    // 0 → camera plane (z = 12). Past z = 12 the logo is behind the camera.
+    const z = THREE.MathUtils.lerp(0, 22, progress)
+    group.current.position.z = z
   })
 
   return (
-    <group ref={group} scale={18} rotation={[ROT_X, 0, 0]}>
-      <ALogoMesh />
+    <group ref={group} position={[0, 0, 0]}>
+      <group scale={10}>
+        <Center>
+          <group rotation={[ROT_X, 0, 0]}>
+            <ALogoMesh />
+          </group>
+        </Center>
+      </group>
     </group>
   )
 }

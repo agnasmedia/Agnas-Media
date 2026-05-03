@@ -4,57 +4,63 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MagneticButton from '../../components/MagneticButton'
 import { MarqueeStrip } from '../../components/MarqueeStrip'
-import showreelMp4 from '../../assets/showreel_preview.mp4'
 import styles from './Showreel.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const SHOWREEL_URL = 'https://www.youtube.com/watch?v=4k1ty5U4Hi4'
 
-export function Showreel() {
+export function Showreel({ onShowreelProgress }) {
   const sectionRef = useRef(null)
-  const innerRef = useRef(null)
+  const stageRef = useRef(null)
 
   useGSAP(
     () => {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      if (reduce) return undefined
-
-      const inner = innerRef.current
       const section = sectionRef.current
-      if (!inner || !section) return undefined
+      const stage = stageRef.current
+      if (!section || !stage) return undefined
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: '+=260%',
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
+      if (reduce) {
+        onShowreelProgress?.(0.45)
+        return undefined
+      }
+
+      const applyExit = (p) => {
+        const t = Math.max(0, Math.min(1, (p - 0.6) / 0.4))
+        const ease = t * t * (3 - 2 * t)
+        const y = -ease * window.innerHeight * 1.15
+        stage.style.transform = `translate3d(0, ${y}px, 0)`
+      }
+
+      const st = ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: '+=220%',
+        pin: true,
+        scrub: 0.5,
+        anticipatePin: 1,
+        onUpdate: (self) => {
+          const p = self.progress
+          onShowreelProgress?.(p)
+          applyExit(p)
+        },
+        onLeaveBack: () => {
+          onShowreelProgress?.(0)
+          applyExit(0)
+        },
+        onLeave: () => {
+          onShowreelProgress?.(1)
+          applyExit(1)
         },
       })
 
-      tl.fromTo(
-        inner,
-        {
-          scale: 0.38,
-          borderRadius: '20px',
-        },
-        {
-          scale: 1,
-          borderRadius: '0px',
-          ease: 'none',
-          duration: 1,
-        },
-      )
-
       return () => {
-        tl.scrollTrigger?.kill()
-        tl.kill()
+        st.kill()
+        stage.style.transform = ''
       }
     },
-    { scope: sectionRef },
+    { scope: sectionRef, dependencies: [onShowreelProgress] },
   )
 
   return (
@@ -62,33 +68,23 @@ export function Showreel() {
       <h2 id="showreel-heading" className="visuallyHidden">
         Showreel
       </h2>
-      <div className={styles.marquee}>
-        <MarqueeStrip first="Showreel" second="Showreel" />
-      </div>
 
-      <div className={styles.stage}>
-        <div ref={innerRef} className={styles.videoInner}>
-          <video
-            className={styles.video}
-            src={showreelMp4}
-            muted
-            playsInline
-            loop
-            autoPlay
-            preload="metadata"
-          />
-          <MagneticButton className={styles.magnetic}>
-            <button
-              type="button"
-              className={styles.fullBtn}
-              data-cursor-text="Watch video…"
-              aria-label="Open full showreel video on YouTube"
-              onClick={() => window.open(SHOWREEL_URL, '_blank', 'noopener,noreferrer')}
-            >
-              <span className={styles.fullBtnLabel}>Full Video</span>
-            </button>
-          </MagneticButton>
+      <div ref={stageRef} className={styles.stage}>
+        <div className={styles.marquee} aria-hidden>
+          <MarqueeStrip first="Showreel" second="Showreel" />
         </div>
+
+        <MagneticButton className={styles.ctaWrap}>
+          <button
+            type="button"
+            className={styles.fullBtn}
+            data-cursor-text="Watch video…"
+            aria-label="Open full showreel video on YouTube"
+            onClick={() => window.open(SHOWREEL_URL, '_blank', 'noopener,noreferrer')}
+          >
+            <span className={styles.fullBtnLabel}>Full Video</span>
+          </button>
+        </MagneticButton>
       </div>
     </section>
   )
