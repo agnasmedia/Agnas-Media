@@ -4,14 +4,23 @@ import { SRGBColorSpace } from 'three'
 import * as THREE from 'three'
 import showreelMp4 from '../assets/showreel_preview.mp4'
 
+/** Hero scroll (A-logo): from this point the showreel plane begins rotating in behind the hero. */
+const HERO_ENTER_START = 0.6
+
+/** First segment of the pinned showreel can still complete the enter if hero finished late. */
+const SHOWREEL_ENTER_END = 0.3
+
+/** Hold flat until this showreel progress, then exit upward. */
+const SHOWREEL_EXIT_START = 0.6
+
 /**
  * Showreel video plane.
  *
- *   progress 0.00 → 0.30  ENTER : rotates Y from -π/2 → 0, slides Z from -16 → 0.
- *   progress 0.30 → 0.60  HOLD  : sits flat, parallel, dead-center, no rotation.
- *   progress 0.60 → 1.00  EXIT  : translates straight up. NO further rotation.
+ *   ENTER (rotate Y, slide Z): heroProgress HERO_ENTER_START → 1, and/or first SHOWREEL_ENTER_END of pin.
+ *   HOLD: enter complete and showreelProgress < SHOWREEL_EXIT_START.
+ *   EXIT: showreelProgress SHOWREEL_EXIT_START → 1 (translate up, no rotation).
  */
-export function ShowreelPlane({ progress }) {
+export function ShowreelPlane({ heroProgress, showreelProgress }) {
   const ref = useRef()
   const [video] = useState(() =>
     Object.assign(document.createElement('video'), {
@@ -37,39 +46,41 @@ export function ShowreelPlane({ progress }) {
   useFrame(() => {
     const obj = ref.current
     if (!obj) return
-    const p = THREE.MathUtils.clamp(progress, 0, 1)
+    const h = THREE.MathUtils.clamp(heroProgress, 0, 1)
+    const sp = THREE.MathUtils.clamp(showreelProgress, 0, 1)
+
+    const fromHero = THREE.MathUtils.clamp((h - HERO_ENTER_START) / (1 - HERO_ENTER_START), 0, 1)
+    const fromShowreelPin = THREE.MathUtils.clamp(sp / SHOWREEL_ENTER_END, 0, 1)
+    const enterT = Math.max(fromHero, fromShowreelPin)
+    const ease = THREE.MathUtils.clamp(enterT, 0, 1)
 
     let rotY = 0
     let posY = 0
     let posZ = 0
 
-    if (p < 0.3) {
-      const t = p / 0.3
-      const ease = THREE.MathUtils.smoothstep(t, 0, 1)
+    if (enterT < 1) {
       rotY = THREE.MathUtils.lerp(-Math.PI / 2, 0, ease)
       posZ = THREE.MathUtils.lerp(-16, 0, ease)
-    } else if (p < 0.6) {
+      posY = 0
+    } else if (sp < SHOWREEL_EXIT_START) {
       rotY = 0
       posZ = 0
       posY = 0
     } else {
-      const t = (p - 0.6) / 0.4
-      const ease = t * t * (3 - 2 * t)
+      const t = (sp - SHOWREEL_EXIT_START) / (1 - SHOWREEL_EXIT_START)
+      const exitEase = t * t * (3 - 2 * t)
       rotY = 0
       posZ = 0
-      // Plane is 9 tall; camera visible-height at z=0 is ~9.94.
-      // Move to y = 12 so the plane fully clears the top of the viewport.
-      posY = THREE.MathUtils.lerp(0, 12, ease)
+      posY = THREE.MathUtils.lerp(0, 12, exitEase)
     }
 
     obj.rotation.y = rotY
     obj.position.set(0, posY, posZ)
   })
 
-  // Stay completely hidden until the hero section has been scrolled past and the
-  // showreel ScrollTrigger starts driving progress > 0. This prevents any edge-on
-  // sliver of the plane (or its black backing) from showing through the A-logo.
-  const visible = progress > 0 && progress < 1
+  const h = heroProgress
+  const sp = showreelProgress
+  const visible = (h >= HERO_ENTER_START - 0.01 || sp > 0) && sp < 1
 
   return (
     <group ref={ref} position={[0, 0, -16]} rotation={[0, -Math.PI / 2, 0]} visible={visible}>
