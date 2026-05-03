@@ -2,17 +2,17 @@
   position: relative;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: clamp(1rem, 4vw, 2rem) clamp(1rem, 4vw, 3rem) clamp(4rem, 12vh, 8rem);
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2.5rem) clamp(3rem, 10vh, 6rem);
 }
 
 .nav {
   position: absolute;
-  top: clamp(2rem, 8vh, 5rem);
-  right: clamp(1rem, 4vw, 4rem);
+  top: clamp(1.5rem, 5vh, 3.5rem);
+  right: clamp(1rem, 4vw, 3rem);
   display: flex;
-  gap: clamp(1rem, 3vw, 3rem);
-  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
-  font-weight: 500;
+  gap: clamp(0.75rem, 2.5vw, 2rem);
+  font-size: clamp(1.04rem, 1.24vw, 1.24rem);
+  font-weight: var(--type-emphasis-weight);
 }
 
 .navLink {
@@ -28,34 +28,67 @@
 
 .title {
   margin: 0;
-  padding-top: clamp(2rem, 6vh, 4rem);
-  max-width: min(92vw, 1100px);
+  padding-top: clamp(1.25rem, 4vh, 2.75rem);
+  max-width: min(92vw, 832px);
 }
 
 .line {
   display: block;
-  font-size: clamp(2.5rem, 8vw, 6rem);
-  font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: 0.02em;
+  font-size: clamp(1.75rem, 3.7vw, 3.05rem);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-track);
+}
+
+.logoLine {
+  line-height: 1;
+  margin-bottom: 0.15em;
+}
+
+/* Keep wordmark + ® on one line; image can shrink before the mark wraps. */
+.logoLockup {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: clamp(0.06em, 0.35vw, 0.12em);
+  max-width: 100%;
+}
+
+.logoImg {
+  display: block;
+  width: auto;
+  max-width: min(42vw, 286px);
+  max-height: clamp(2.4rem, 5.5vw, 3.45rem);
+  height: auto;
+  flex: 0 1 auto;
+  min-width: 0;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .reg {
-  font-size: 0.35em;
-  font-weight: 300;
-  vertical-align: super;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 0.08em;
+  font-size: 0.42em;
+  font-weight: var(--type-display-weight);
+  line-height: 1;
 }
 
 .intro {
   position: absolute;
-  left: clamp(1rem, 11vw, 14vw);
-  bottom: clamp(5rem, 14vh, 10rem);
-  max-width: min(640px, 85vw);
+  left: auto;
+  right: clamp(1rem, 8vw, 10vw);
+  bottom: clamp(4rem, 12vh, 8rem);
+  max-width: min(546px, 88vw);
   margin: 0;
-  font-size: clamp(0.95rem, 1.15vw, 1.15rem);
-  line-height: 1.75;
+  margin-left: auto;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+  text-align: right;
   color: var(--fg);
-  font-weight: 300;
+  font-weight: var(--type-body-weight);
 }
 
 @media (max-width: 768px) {
@@ -64,13 +97,32 @@
     top: auto;
     right: auto;
     justify-content: flex-end;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .title {
+    max-width: 100%;
+  }
+
+  .line {
+    font-size: clamp(1.6rem, 5.2vw, 2.4rem);
+  }
+
+  .logoImg {
+    max-width: min(58vw, 260px);
+    max-height: clamp(2.15rem, 7vw, 2.85rem);
   }
 
   .intro {
     position: relative;
     left: auto;
+    right: auto;
     bottom: auto;
-    margin-top: 3rem;
+    margin-top: 2rem;
+    margin-left: 0;
+    max-width: 100%;
+    font-size: clamp(1.05rem, 3.2vw, 1.2rem);
+    text-align: left;
+    color: var(--fg);
   }
 }

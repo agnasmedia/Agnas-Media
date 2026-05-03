@@ -5,6 +5,15 @@
   --accent: #c24040;
   --border: rgba(255, 255, 255, 0.15);
   --font: 'HelveticaNeueCyr', system-ui, -apple-system, sans-serif;
+
+  /* Align with Hero: light display type + relaxed body (line spacing). */
+  --type-display-weight: 300;
+  --type-display-leading: 1.12;
+  --type-display-track: -0.01em;
+  --type-body-weight: 300;
+  --type-body-leading: 1.65;
+  --type-body-size: clamp(1rem, 1.17vw, 1.17rem);
+  --type-emphasis-weight: 500;
 }
 
 *,
@@ -24,7 +33,8 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font);
-  font-weight: 300;
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
   overflow-x: hidden;
 }
 

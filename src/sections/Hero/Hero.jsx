@@ -53,17 +53,20 @@ export function Hero({ onHeroProgress }) {
       </nav>
 
       <h1 className={styles.title}>
-        <span data-hero-line className={styles.line}>
-          Agnas Media <sup className={styles.reg}>®</sup>
+        <span data-hero-line className={`${styles.line} ${styles.logoLine}`}>
+          <span className={styles.logoLockup}>
+            <img className={styles.logoImg} src="/full-logo.png" alt="Agnas Media" />
+            <span className={styles.reg}>®</span>
+          </span>
         </span>
         <span data-hero-line className={styles.line}>
-          Digital Design
+        Unforgettable
         </span>
         <span data-hero-line className={styles.line}>
-          Boutique with Focus
+        Products & Journeys
         </span>
         <span data-hero-line className={styles.line}>
-          on Aesthetics
+        That Drive Growth & Engagement
         </span>
       </h1>
 

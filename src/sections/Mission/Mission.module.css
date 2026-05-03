@@ -15,8 +15,9 @@
 .quote {
   margin: 0;
   font-size: clamp(1.75rem, 3.5vw, 3.6rem);
-  font-weight: 500;
-  line-height: 1.15;
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-track);
   max-width: min(38ch, 100%);
   text-align: center;
   text-wrap: balance;
@@ -73,8 +74,9 @@
 
 .body {
   margin: 0 0 1.5rem;
-  font-size: clamp(1rem, 1.25vw, 1.3rem);
-  line-height: 1.65;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
   color: rgba(255, 255, 255, 0.95);
   text-align: center;
   text-wrap: pretty;
@@ -82,8 +84,9 @@
 
 .link {
   display: inline-block;
-  font-size: clamp(1rem, 1.15vw, 1.15rem);
-  font-weight: 500;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-emphasis-weight);
+  line-height: var(--type-body-leading);
   text-decoration: underline;
   text-underline-offset: 0.2em;
   color: var(--fg);

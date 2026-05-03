@@ -68,9 +68,9 @@
 }
 
 .fullBtnLabel {
-  font-size: clamp(0.65rem, 1.2vw, 1rem);
-  font-weight: 500;
+  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+  font-weight: var(--type-emphasis-weight);
   text-align: center;
   max-width: 70%;
-  line-height: 1.2;
+  line-height: var(--type-body-leading);
 }

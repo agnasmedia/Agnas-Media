@@ -9,8 +9,9 @@
 
 .label {
   margin: 0 0 1.5rem;
-  font-size: clamp(1rem, 1.25vw, 1.25rem);
-  font-weight: 400;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-emphasis-weight);
+  line-height: var(--type-body-leading);
 }
 
 .list {
@@ -21,9 +22,9 @@
 
 .line {
   font-size: clamp(2.8rem, 9vw, 7rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.02em;
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-track);
   overflow: hidden;
   padding-bottom: 0.06em;
 }

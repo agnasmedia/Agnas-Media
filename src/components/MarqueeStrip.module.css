@@ -19,8 +19,9 @@
   display: inline-block;
   margin-right: 3rem;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-track);
 }
 
 @keyframes marquee {
