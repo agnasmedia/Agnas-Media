@@ -46,7 +46,7 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          useGLTF.preload('/models/gargoyle-transformed.glb')
+          useGLTF.preload('/models/alien-transformed.glb')
           onRequestFooterModel?.()
           io.disconnect()
         }

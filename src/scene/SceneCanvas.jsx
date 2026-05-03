@@ -6,7 +6,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { CameraRig } from './CameraRig'
 import { ALogoScene } from './ALogoScene'
 import { ShowreelPlane } from './ShowreelPlane'
-import { GargoyleScene } from './GargoyleScene'
+import { AlienScene } from './AlienScene'
 
 function SceneReadyBinder({ onReady }) {
   const { active } = useProgress()
@@ -61,7 +61,7 @@ export function SceneCanvas({
           <directionalLight position={[-8, 10, 6]} intensity={0.5} />
           <ALogoScene progress={heroProgress} />
           <ShowreelPlane heroProgress={heroProgress} showreelProgress={showreelProgress} />
-          {mountFooterModel ? <GargoyleScene progress={footerProgress} /> : null}
+          {mountFooterModel ? <AlienScene progress={footerProgress} /> : null}
           {!reducedMotion ? (
             <EffectComposer>
               <Fluid
