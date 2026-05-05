@@ -3,14 +3,20 @@
   Draco: public/models/alien-transformed.glb — source: models/alien.glb
 */
 
+import { useLayoutEffect, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { applyLightAwareMaterials } from './lightAwareMaterials'
 
 const MODEL = '/models/alien-transformed.glb'
 
 export function AlienMesh(props) {
   const { nodes, materials } = useGLTF(MODEL)
+  const root = useRef(null)
+  useLayoutEffect(() => {
+    applyLightAwareMaterials(root.current)
+  }, [])
   return (
-    <group {...props} dispose={null}>
+    <group ref={root} {...props} dispose={null}>
       <mesh
         geometry={nodes.node_id5_Material_50_0.geometry}
         material={materials.Material_50}

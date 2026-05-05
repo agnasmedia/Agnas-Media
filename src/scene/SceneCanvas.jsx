@@ -1,9 +1,10 @@
 import { Canvas } from '@react-three/fiber'
-import { PerspectiveCamera, useProgress } from '@react-three/drei'
+import { Environment, PerspectiveCamera, useProgress } from '@react-three/drei'
 import { EffectComposer } from '@react-three/postprocessing'
 import { Fluid } from '@whatisjery/react-fluid-distortion'
 import { Suspense, useEffect, useState } from 'react'
 import { CameraRig } from './CameraRig'
+import { InteractiveSceneLights } from './InteractiveSceneLights'
 import { ALogoScene } from './ALogoScene'
 import { ShowreelPlane } from './ShowreelPlane'
 import { AlienScene } from './AlienScene'
@@ -56,9 +57,11 @@ export function SceneCanvas({
         <Suspense fallback={null}>
           <PerspectiveCamera makeDefault position={[0, 0.5, 12]} fov={45} />
           <CameraRig />
-          <ambientLight intensity={0.45} />
-          <spotLight position={[8, 14, 12]} intensity={1.35} angle={0.55} penumbra={0.55} />
-          <directionalLight position={[-8, 10, 6]} intensity={0.5} />
+          <ambientLight intensity={0.22} />
+          <hemisphereLight args={['#f0f4ff', '#080810']} intensity={0.35} />
+          <directionalLight position={[-5.5, 9.5, 7.5]} intensity={0.42} color="#e8ecff" />
+          <Environment preset="city" background={false} environmentIntensity={0.55} />
+          <InteractiveSceneLights reducedMotion={reducedMotion} />
           <ALogoScene progress={heroProgress} />
           <ShowreelPlane heroProgress={heroProgress} showreelProgress={showreelProgress} />
           {mountFooterModel ? <AlienScene progress={footerProgress} /> : null}

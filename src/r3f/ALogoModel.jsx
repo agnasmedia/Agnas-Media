@@ -3,14 +3,20 @@
   Source: public/models/agnas1.glb → Draco-compressed to public/models/agnas1-transformed.glb
 */
 
+import { useLayoutEffect, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { applyLightAwareMaterials } from './lightAwareMaterials'
 
 const MODEL = '/models/agnas1-transformed.glb'
 
 export function ALogoMesh(props) {
   const { nodes, materials } = useGLTF(MODEL)
+  const root = useRef(null)
+  useLayoutEffect(() => {
+    applyLightAwareMaterials(root.current)
+  }, [])
   return (
-    <group {...props} dispose={null}>
+    <group ref={root} {...props} dispose={null}>
       <mesh geometry={nodes.Curve.geometry} material={materials['SVGMat.001']} scale={3.418} />
       <mesh geometry={nodes.Curve001.geometry} material={materials['SVGMat.002']} scale={3.418} />
       <mesh geometry={nodes.Curve003.geometry} material={materials['SVGMat.004']} />
