@@ -20,6 +20,7 @@ gsap.registerPlugin(ScrollTrigger)
 export default function App() {
   const [heroProgress, setHeroProgress] = useState(0)
   const [showreelProgress, setShowreelProgress] = useState(0)
+  const [servicesProgress, setServicesProgress] = useState(0)
   const [footerProgress, setFooterProgress] = useState(0)
   const [mountFooterModel, setMountFooterModel] = useState(false)
   const [sceneReady, setSceneReady] = useState(false)
@@ -30,6 +31,10 @@ export default function App() {
 
   const onShowreelProgress = useCallback((v) => {
     setShowreelProgress(v)
+  }, [])
+
+  const onServicesProgress = useCallback((v) => {
+    setServicesProgress(v)
   }, [])
 
   const onFooterProgress = useCallback((v) => {
@@ -61,6 +66,7 @@ export default function App() {
       <SceneCanvas
         heroProgress={heroProgress}
         showreelProgress={showreelProgress}
+        servicesProgress={servicesProgress}
         footerProgress={footerProgress}
         mountFooterModel={mountFooterModel}
         onSceneReady={onSceneReady}
@@ -80,7 +86,7 @@ export default function App() {
           linkHref="https://agnasmedia.com/team"
           linkLabel="Read more about us"
         />
-        <Services />
+        <Services onServicesProgress={onServicesProgress} />
         <Mission
           id="beliefs"
           quote={
