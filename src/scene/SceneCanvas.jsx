@@ -7,6 +7,7 @@ import { CameraRig } from './CameraRig'
 import { InteractiveSceneLights } from './InteractiveSceneLights'
 import { ALogoScene } from './ALogoScene'
 import { ShowreelPlane } from './ShowreelPlane'
+import { ServicesCloudsScene } from './ServicesCloudsScene'
 import { AlienScene } from './AlienScene'
 
 function SceneReadyBinder({ onReady }) {
@@ -35,6 +36,7 @@ function useReducedMotion() {
 export function SceneCanvas({
   heroProgress,
   showreelProgress,
+  servicesProgress,
   footerProgress,
   mountFooterModel,
   onSceneReady,
@@ -64,6 +66,7 @@ export function SceneCanvas({
           <InteractiveSceneLights reducedMotion={reducedMotion} />
           <ALogoScene progress={heroProgress} />
           <ShowreelPlane heroProgress={heroProgress} showreelProgress={showreelProgress} />
+          <ServicesCloudsScene progress={servicesProgress} reducedMotion={reducedMotion} />
           {mountFooterModel ? <AlienScene progress={footerProgress} /> : null}
           {!reducedMotion ? (
             <EffectComposer>

@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const ITEMS = ['UX Strategy', 'UI Design', 'Development', 'Communication']
 
-export function Services() {
+export function Services({ onServicesProgress }) {
   const rootRef = useRef(null)
 
   useGSAP(
@@ -30,9 +30,23 @@ export function Services() {
         },
       })
 
-      return undefined
+      const st = ScrollTrigger.create({
+        trigger: rootRef.current,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: 0.18,
+        onUpdate: (self) => {
+          onServicesProgress?.(self.progress)
+        },
+        onLeaveBack: () => onServicesProgress?.(0),
+        onLeave: () => onServicesProgress?.(1),
+      })
+
+      return () => {
+        st.kill()
+      }
     },
-    { scope: rootRef },
+    { scope: rootRef, dependencies: [onServicesProgress] },
   )
 
   return (

@@ -49,6 +49,7 @@ export function Mission({ id, quote, aside, linkHref, linkLabel }) {
               target="_blank"
               rel="noreferrer noopener"
               aria-label={linkLabel}
+              data-mission-arrow
             >
               <ArrowIcon />
             </a>

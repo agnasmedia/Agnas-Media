@@ -1,8 +1,13 @@
 .section {
+  position: relative;
   padding: clamp(4rem, 12vh, 8rem) clamp(1rem, 5vw, 4rem) clamp(6rem, 16vh, 12rem);
+  isolation: isolate;
+  --ribbon-opacity: 0;
 }
 
 .heading {
+  position: relative;
+  z-index: 2;
   margin: 0 auto clamp(3rem, 8vh, 6rem);
   text-align: center;
   font-size: clamp(2.5rem, 9vw, 10.3rem);
@@ -12,6 +17,8 @@
 }
 
 .grid {
+  position: relative;
+  z-index: 2;
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
@@ -19,6 +26,49 @@
   gap: 0 clamp(1.5rem, 4vw, 3rem);
   align-items: start;
   justify-items: center;
+}
+
+/* Stroke ribbon styling */
+
+.ribbonLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  opacity: var(--ribbon-opacity);
+  mix-blend-mode: screen;
+}
+
+.ribbonGlow,
+.ribbonBody,
+.ribbonCore {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.ribbonGlow {
+  /* stroke: rgba(194, 64, 64, 0.42); */
+  stroke-width: clamp(28px, 5vw, 62px);
+  filter: url('#works-ribbon-glow');
+  opacity: 0.44;
+}
+
+.ribbonBody {
+  stroke: #c24040;
+  /* stroke-width: clamp(14px, 2.6vw, 34px); */
+  filter: url('#works-ribbon-glow');
+  opacity: 0.86;
+}
+
+.ribbonCore {
+  stroke: #c24040;
+  stroke-width: clamp(2px, 1vw, 3px);
+  opacity: 0.7;
 }
 
 .column {
@@ -33,6 +83,8 @@
 }
 
 .card {
+  position: relative;
+  z-index: 2;
   width: 100%;
   max-width: min(88vw, 300px);
   order: var(--order);
@@ -138,5 +190,13 @@
 
   .sub {
     font-size: clamp(0.85rem, 1.2vw, 1rem);
+  }
+
+  .ribbonGlow {
+    stroke-width: clamp(24px, 9vw, 48px);
+  }
+
+  .ribbonBody {
+    stroke-width: clamp(12px, 5vw, 28px);
   }
 }
