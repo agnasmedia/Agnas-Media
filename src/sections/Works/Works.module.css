@@ -200,3 +200,9 @@
     stroke-width: clamp(12px, 5vw, 28px);
   }
 }
+
+@media (max-width: 768px) {
+  .ribbonLayer {
+    display: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -6,6 +6,8 @@ import { WORKS } from '../../data/works'
 import styles from './Works.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const RIBBON_DISABLED_QUERY = '(max-width: 768px)'
 
 /**
  * First card in each column: offset tops in vh so (0,1,2) never share a horizontal line.
@@ -132,12 +134,27 @@ export function Works() {
   const sectionRef = useRef(null)
   const svgRef = useRef(null)
   const headingRef = useRef(null)
+  const [ribbonEnabled, setRibbonEnabled] = useState(() => {
+    if (typeof window === 'undefined') return true
+    return !window.matchMedia(RIBBON_DISABLED_QUERY).matches
+  })
   const columns = useMemo(() => {
     const c = [[], [], []]
     WORKS.forEach((work, index) => {
       c[index % 3].push({ work, index })
     })
     return c
+  }, [])
+
+  useEffect(() => {
+    const mql = window.matchMedia(RIBBON_DISABLED_QUERY)
+    const onChange = (e) => setRibbonEnabled(!e.matches)
+    if (mql.addEventListener) mql.addEventListener('change', onChange)
+    else mql.addListener(onChange)
+    return () => {
+      if (mql.removeEventListener) mql.removeEventListener('change', onChange)
+      else mql.removeListener(onChange)
+    }
   }, [])
 
   useEffect(
@@ -147,7 +164,10 @@ export function Works() {
       const heading = headingRef.current
       const paths = svg ? gsap.utils.toArray(svg.querySelectorAll('[data-ribbon-path]')) : []
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      if (!section || !svg || !paths.length || reduce) return undefined
+      if (!section || !svg || !paths.length || reduce || !ribbonEnabled) {
+        if (section) section.style.setProperty('--ribbon-opacity', 0)
+        return undefined
+      }
 
       // Optional: ribbon's left "tail" anchors at the Beliefs section's circle
       // arrow so the ribbon emerges from there.
@@ -271,7 +291,7 @@ export function Works() {
         st.kill()
       }
     },
-    [],
+    [ribbonEnabled],
   )
 
   return (
