@@ -50,23 +50,23 @@
 }
 
 .ribbonGlow {
-  stroke: rgba(255, 98, 82, 0.52);
-  stroke-width: clamp(56px, 9vw, 118px);
+  stroke: rgba(194, 64, 64, 0.42);
+  stroke-width: clamp(28px, 5vw, 62px);
   filter: url('#works-ribbon-glow');
-  opacity: 0.5;
+  opacity: 0.44;
 }
 
 .ribbonBody {
-  stroke: url('#works-ribbon-gradient');
-  stroke-width: clamp(26px, 5vw, 66px);
+  stroke: #c24040;
+  stroke-width: clamp(14px, 2.6vw, 34px);
   filter: url('#works-ribbon-glow');
-  opacity: 0.82;
+  opacity: 0.86;
 }
 
 .ribbonCore {
-  stroke: rgba(255, 245, 235, 0.78);
-  stroke-width: clamp(2px, 0.45vw, 6px);
-  opacity: 0.58;
+  stroke: #c24040;
+  stroke-width: clamp(1px, 0.28vw, 3px);
+  opacity: 0.7;
 }
 
 .column {
@@ -191,10 +191,10 @@
   }
 
   .ribbonGlow {
-    stroke-width: clamp(40px, 14vw, 74px);
+    stroke-width: clamp(24px, 9vw, 48px);
   }
 
   .ribbonBody {
-    stroke-width: clamp(18px, 8vw, 42px);
+    stroke-width: clamp(12px, 5vw, 28px);
   }
 }
