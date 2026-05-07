@@ -131,6 +131,7 @@ function WorkCard({ work, index }) {
 export function Works() {
   const sectionRef = useRef(null)
   const svgRef = useRef(null)
+  const headingRef = useRef(null)
   const columns = useMemo(() => {
     const c = [[], [], []]
     WORKS.forEach((work, index) => {
@@ -143,9 +144,14 @@ export function Works() {
     () => {
       const section = sectionRef.current
       const svg = svgRef.current
+      const heading = headingRef.current
       const paths = svg ? gsap.utils.toArray(svg.querySelectorAll('[data-ribbon-path]')) : []
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       if (!section || !svg || !paths.length || reduce) return undefined
+
+      // Optional: ribbon's left "tail" anchors at the Beliefs section's circle
+      // arrow so the ribbon emerges from there.
+      const beliefArrow = document.querySelector('#beliefs [data-mission-arrow]')
 
       const updatePath = () => {
         const sectionRect = section.getBoundingClientRect()
@@ -159,6 +165,37 @@ export function Works() {
 
         svg.setAttribute('viewBox', `0 0 ${width} ${height}`)
 
+        // Belief-arrow anchor (typically above the section → negative y).
+        let arrowY
+        if (beliefArrow) {
+          const ar = beliefArrow.getBoundingClientRect()
+          arrowY = ar.top - sectionRect.top + ar.height / 2
+        } else {
+          arrowY = -Math.min(height * 0.18, 220)
+        }
+
+        // Build a soft sweep up to the heading underline, then back out.
+        // We use Range to measure the actual text content of the heading
+        // (its <h2> element is a block centred via text-align so its bounding
+        // rect is much wider than the visible text).
+        const headingPoints = []
+        if (heading) {
+          const range = document.createRange()
+          range.selectNodeContents(heading)
+          const tr = range.getBoundingClientRect()
+          range.detach?.()
+          const ulY = tr.bottom - sectionRect.top + Math.min(26, Math.max(10, tr.height * 0.12))
+          const ulLeft = tr.left - sectionRect.left
+          const ulRight = tr.right - sectionRect.left
+          const lead = Math.min(160, Math.max(90, width * 0.08))
+          headingPoints.push(
+            { x: Math.max(ulLeft - lead, -width * 0.04), y: ulY },
+            { x: ulLeft, y: ulY },
+            { x: ulRight, y: ulY },
+            { x: Math.min(ulRight + lead, width * 1.04), y: ulY },
+          )
+        }
+
         const centers = cards.map((card) => {
           const rect = card.getBoundingClientRect()
           return {
@@ -167,9 +204,10 @@ export function Works() {
           }
         })
         const points = [
-          { x: -width * 0.18, y: centers[0].y },
+          { x: -width * -1, y: arrowY },
+          ...headingPoints,
           ...centers,
-          { x: width * 1.18, y: centers[centers.length - 1].y },
+          { x: width * 1.22, y: centers[centers.length - 1].y },
         ]
         const d = createRibbonPath(points)
 
@@ -201,13 +239,15 @@ export function Works() {
       const sortedCards = gsap.utils
         .toArray(section.querySelectorAll('[data-work-card]'))
         .sort((a, b) => Number(a.dataset.workIndex) - Number(b.dataset.workIndex))
-      const firstCard = sortedCards[0] ?? section
       const lastCard = sortedCards[sortedCards.length - 1] ?? section
+      // If we have the beliefs arrow, start the timeline as it scrolls into
+      // view; otherwise fall back to the first card.
+      const startTrigger = beliefArrow ?? sortedCards[0] ?? section
 
       const st = ScrollTrigger.create({
-        trigger: firstCard,
+        trigger: startTrigger,
         endTrigger: lastCard,
-        start: 'top bottom-=10%',
+        start: beliefArrow ? 'center bottom-=12%' : 'top bottom-=10%',
         end: 'bottom top+=15%',
         scrub: 0.12,
         invalidateOnRefresh: true,
@@ -236,7 +276,7 @@ export function Works() {
 
   return (
     <section ref={sectionRef} className={styles.section} id="works" aria-labelledby="works-heading">
-      <h2 id="works-heading" className={styles.heading}>
+      <h2 ref={headingRef} id="works-heading" className={styles.heading}>
         Recent Works
       </h2>
       <svg ref={svgRef} className={styles.ribbonLayer} aria-hidden="true" focusable="false">

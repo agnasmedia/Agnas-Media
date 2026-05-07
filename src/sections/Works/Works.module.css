@@ -28,6 +28,8 @@
   justify-items: center;
 }
 
+/* Stroke ribbon styling */
+
 .ribbonLayer {
   position: absolute;
   inset: 0;
@@ -50,7 +52,7 @@
 }
 
 .ribbonGlow {
-  stroke: rgba(194, 64, 64, 0.42);
+  /* stroke: rgba(194, 64, 64, 0.42); */
   stroke-width: clamp(28px, 5vw, 62px);
   filter: url('#works-ribbon-glow');
   opacity: 0.44;
@@ -58,14 +60,14 @@
 
 .ribbonBody {
   stroke: #c24040;
-  stroke-width: clamp(14px, 2.6vw, 34px);
+  /* stroke-width: clamp(14px, 2.6vw, 34px); */
   filter: url('#works-ribbon-glow');
   opacity: 0.86;
 }
 
 .ribbonCore {
   stroke: #c24040;
-  stroke-width: clamp(1px, 0.28vw, 3px);
+  stroke-width: clamp(2px, 1vw, 3px);
   opacity: 0.7;
 }
 
