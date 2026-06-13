@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { SiteNav } from '../../components/SiteNav'
 import styles from './Hero.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -40,17 +41,7 @@ export function Hero({ onHeroProgress }) {
 
   return (
     <section ref={sectionRef} className={styles.hero} id="top">
-      <nav className={styles.nav} aria-label="Primary">
-        <a className={styles.navLink} href="#works">
-          Portfolio
-        </a>
-        <a className={styles.navLink} href="#mission">
-          Agency
-        </a>
-        <a className={styles.navLink} href="#contact">
-          Contact
-        </a>
-      </nav>
+      <SiteNav placement="hero" />
 
       <h1 className={styles.title}>
         <span data-hero-line className={`${styles.line} ${styles.logoLine}`}>

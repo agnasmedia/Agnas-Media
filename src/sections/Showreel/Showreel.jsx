@@ -1,18 +1,20 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MagneticButton from '../../components/MagneticButton'
 import { MarqueeStrip } from '../../components/MarqueeStrip'
+import { VideoModal } from '../../components/VideoModal'
 import styles from './Showreel.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const SHOWREEL_URL = 'https://www.youtube.com/watch?v=4k1ty5U4Hi4'
+const SHOWREEL_VIDEO_ID = 'x5faT66jmG4'
 
 export function Showreel({ onShowreelProgress }) {
   const sectionRef = useRef(null)
   const stageRef = useRef(null)
+  const [videoOpen, setVideoOpen] = useState(false)
 
   useGSAP(
     () => {
@@ -34,6 +36,7 @@ export function Showreel({ onShowreelProgress }) {
       }
 
       const st = ScrollTrigger.create({
+        id: 'showreel-pin',
         trigger: section,
         start: 'top top',
         end: '+=220%',
@@ -64,7 +67,7 @@ export function Showreel({ onShowreelProgress }) {
   )
 
   return (
-    <section ref={sectionRef} className={styles.section} aria-labelledby="showreel-heading">
+    <section ref={sectionRef} className={styles.section} id="showreel" aria-labelledby="showreel-heading">
       <h2 id="showreel-heading" className="visuallyHidden">
         Showreel
       </h2>
@@ -79,13 +82,21 @@ export function Showreel({ onShowreelProgress }) {
             type="button"
             className={styles.fullBtn}
             data-cursor-text="Watch video…"
-            aria-label="Open full showreel video on YouTube"
-            onClick={() => window.open(SHOWREEL_URL, '_blank', 'noopener,noreferrer')}
+            aria-label="Play showreel video"
+            aria-haspopup="dialog"
+            onClick={() => setVideoOpen(true)}
           >
             <span className={styles.fullBtnLabel}>Play Showreel</span>
           </button>
         </MagneticButton>
       </div>
+
+      <VideoModal
+        open={videoOpen}
+        onClose={() => setVideoOpen(false)}
+        videoId={SHOWREEL_VIDEO_ID}
+        title="Agnas Media Showreel"
+      />
     </section>
   )
 }

@@ -1,0 +1,36 @@
+.page {
+  min-height: 100vh;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2.5rem) 0;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.08em;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  display: block;
+  width: clamp(140px, 22vw, 220px);
+  height: auto;
+  object-fit: contain;
+  margin-left: -8px;
+}
+
+.reg {
+  font-size: 0.9em;
+  font-weight: var(--type-display-weight);
+  line-height: 1;
+  margin-top: 0.08em;
+}

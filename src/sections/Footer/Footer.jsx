@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -34,12 +35,19 @@ const SOCIAL = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/agnasmedia' },
 ]
 
-export function Footer({ onFooterProgress, onRequestFooterModel }) {
+export function Footer({
+  onFooterProgress,
+  onRequestFooterModel,
+  sceneSync = true,
+  showCta = true,
+  talkHref = '/contact',
+}) {
   const rootRef = useRef(null)
   const sentinalRef = useRef(null)
   const ctaBandRef = useRef(null)
 
   useEffect(() => {
+    if (!sceneSync) return undefined
     const el = sentinalRef.current
     if (!el) return undefined
 
@@ -56,11 +64,11 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
 
     io.observe(el)
     return () => io.disconnect()
-  }, [onRequestFooterModel])
+  }, [onRequestFooterModel, sceneSync])
 
   useGSAP(
     () => {
-      if (!ctaBandRef.current) return undefined
+      if (!sceneSync || !ctaBandRef.current) return undefined
 
       // Trigger off the CTA band itself so progress=0.5 corresponds to the
       // "Let's Talk" button being at the vertical center of the viewport.
@@ -78,29 +86,35 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
         st.kill()
       }
     },
-    { scope: rootRef, dependencies: [onFooterProgress] },
+    { scope: rootRef, dependencies: [onFooterProgress, sceneSync] },
   )
 
   return (
-    <footer ref={rootRef} className={styles.footer} id="contact">
+    <footer
+      ref={rootRef}
+      className={`${styles.footer} ${!showCta ? styles.footerCompact : ''}`}
+      id="contact"
+    >
       <span ref={sentinalRef} className={styles.sentinal} aria-hidden />
 
-      <div ref={ctaBandRef} className={styles.ctaBand}>
-        <div className={styles.marqueeLayer} aria-hidden>
-          <MarqueeStrip first="Let's talk" second="Contact us" />
+      {showCta ? (
+        <div ref={ctaBandRef} className={styles.ctaBand}>
+          <div className={styles.marqueeLayer} aria-hidden>
+            <MarqueeStrip first="Let's talk" second="Contact us" />
+          </div>
+          <div className={styles.ctaLayer}>
+            <MagneticButton className={styles.magnetic}>
+              <Link
+                className={styles.talkBtn}
+                to={talkHref}
+                data-cursor-text="Say hello"
+              >
+                Let&apos;s Talk
+              </Link>
+            </MagneticButton>
+          </div>
         </div>
-        <div className={styles.ctaLayer}>
-          <MagneticButton className={styles.magnetic}>
-            <a
-              className={styles.talkBtn}
-              href="mailto:hello@agnasmedia.com"
-              data-cursor-text="Say hello"
-            >
-              Let&apos;s Talk
-            </a>
-          </MagneticButton>
-        </div>
-      </div>
+      ) : null}
 
       <div className={styles.grid}>
         {CONTACT.map((col) => (

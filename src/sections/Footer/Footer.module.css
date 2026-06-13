@@ -6,6 +6,11 @@
   flex-direction: column;
 }
 
+.footerCompact {
+  min-height: auto;
+  padding-top: clamp(2rem, 6vh, 4rem);
+}
+
 .sentinal {
   position: absolute;
   top: -40vh;
