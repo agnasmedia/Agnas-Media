@@ -83,8 +83,8 @@ export default function App() {
             </>
           }
           aside="With over 200 projects completed, our team has gained a comprehensive understanding of user behavior patterns. This knowledge allows us to provide our clients with efficient and effective solutions to their digital challenges. By leveraging our experience, we are able to achieve maximum efficiency in solving client problems and delivering successful outcomes."
-          linkHref="https://agnasmedia.com/team"
-          linkLabel="Read more about us"
+          linkHref="/#works"
+          linkLabel="VIEW OUR 2025 REEL"
         />
         <Services onServicesProgress={onServicesProgress} />
         <Mission
@@ -92,12 +92,12 @@ export default function App() {
           quote={
             <>
               We believe that the power of design, creativity, and emotion helps large and middle businesses to
-              involve people in their products and services, multiplying their consumer characteristics
+              involve people in their products and services, multiplying their consumer characteristics.
             </>
           }
           aside="We keep looking towards the future, at the same time recognizing that behavior change takes place only with a clear awareness of the current state. Before we get down to the design, our team conducts a thorough audit of how your audience feels. Then we implement an emotional solution, attracting Customers to make a click. In this way, you stay unique today and will be of current interest no matter what awaits you in the future."
           linkHref="https://agnasmedia.com/ru/services"
-          linkLabel="Read more about our services"
+          linkLabel="EXPLORE OUR CAPABILITIES"
         />
         <Works />
         <Awards />

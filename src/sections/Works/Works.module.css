@@ -109,15 +109,18 @@
 
 /* Slightly different heights per track so card tops/bottoms don’t line up across columns. */
 .track0 .thumb {
-  height: min(49vh, 384px);
+  /* height: min(49vh, 384px); */
+  height: auto;
 }
 
 .track1 .thumb {
-  height: min(54vh, 418px);
+  /* height: min(54vh, 418px); */
+  height: auto;
 }
 
 .track2 .thumb {
-  height: min(51vh, 396px);
+  /* height: min(51vh, 396px); */
+  height: auto;
 }
 
 .img {
@@ -181,7 +184,8 @@
   .track0 .thumb,
   .track1 .thumb,
   .track2 .thumb {
-    height: min(62vh, 480px);
+    /* height: min(62vh, 480px); */
+    height: auto;
   }
 
   .title {

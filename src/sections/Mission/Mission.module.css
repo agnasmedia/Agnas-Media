@@ -88,10 +88,17 @@
   font-size: var(--type-body-size);
   font-weight: var(--type-emphasis-weight);
   line-height: var(--type-body-leading);
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: 0.2em;
   color: var(--fg);
   text-align: center;
+  font-size: 0.8em;
+  font-weight: 100;
+  border-bottom: 1px solid var(--fg);
+}
+
+.link:hover{
+  border-bottom: 1px solid var(--fg);
 }
 
 @media (max-width: 600px) {

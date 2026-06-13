@@ -71,9 +71,9 @@ export function Hero({ onHeroProgress }) {
       </h1>
 
       <p className={styles.intro}>
+        <b>Your vision, flawlessly executed.</b><br></br>
         We pride ourselves on our ability to craft digital products that not only meet but exceed the
-        expectations of our clients. With a wealth of experience and expertise in the field of digital product
-        development, we understand how to design user-friendly interfaces that captivate and engage audiences.
+        expectations of our clients. Backed by years of expertise, we blend intuitive user experiences with powerful brand strategies to create digital products that captivate your audience and drive real growth.
       </p>
     </section>
   )

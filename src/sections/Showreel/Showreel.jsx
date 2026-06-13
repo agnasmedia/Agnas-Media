@@ -82,7 +82,7 @@ export function Showreel({ onShowreelProgress }) {
             aria-label="Open full showreel video on YouTube"
             onClick={() => window.open(SHOWREEL_URL, '_blank', 'noopener,noreferrer')}
           >
-            <span className={styles.fullBtnLabel}>Full Video</span>
+            <span className={styles.fullBtnLabel}>Play Showreel</span>
           </button>
         </MagneticButton>
       </div>
