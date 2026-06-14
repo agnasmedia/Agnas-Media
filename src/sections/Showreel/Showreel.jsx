@@ -9,7 +9,7 @@ import styles from './Showreel.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const SHOWREEL_VIDEO_ID = 'x5faT66jmG4'
+const SHOWREEL_VIDEO_ID = 'Lnfivo5rADQ'
 
 export function Showreel({ onShowreelProgress }) {
   const sectionRef = useRef(null)
@@ -95,7 +95,7 @@ export function Showreel({ onShowreelProgress }) {
         open={videoOpen}
         onClose={() => setVideoOpen(false)}
         videoId={SHOWREEL_VIDEO_ID}
-        title="Agnas Media Showreel"
+        title=""
       />
     </section>
   )

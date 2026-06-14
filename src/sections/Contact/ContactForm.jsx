@@ -86,7 +86,7 @@ export function ContactForm() {
     <section className={styles.contact} aria-labelledby="contact-heading">
       <div className={styles.inner}>
         <h1 id="contact-heading" className={styles.heading}>
-          Hello! We are happy to see You on this page. Please tell what project you want to do with us?
+          Hello there! We're so excited you found us. Tell us a bit about the project you have in mind!
         </h1>
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>

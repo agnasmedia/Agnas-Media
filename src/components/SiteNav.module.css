@@ -13,13 +13,14 @@
 .navFixed {
   position: fixed;
   top: clamp(1rem, 3vh, 1.5rem);
-  right: clamp(0.75rem, 3vw, 1.25rem);
+  right: 20px;
   left: auto;
 }
 
 .navDesktop {
   display: flex;
   gap: clamp(0.75rem, 2.5vw, 2rem);
+  margin-right: 40px!important;
 }
 
 .navMobile {
@@ -149,8 +150,13 @@
 @media (max-width: 768px) {
   .navHero {
     position: fixed;
-    top: clamp(1rem, 3vh, 1.5rem);
-    right: clamp(0.75rem, 3vw, 1.25rem);
+    top: 27px;
+    right: 20px;
+  }
+
+  .menuLink{
+    padding: 20px;
+    text-align: left;
   }
 
   .navDesktop {

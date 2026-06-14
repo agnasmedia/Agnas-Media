@@ -53,7 +53,7 @@ export function Services({ onServicesProgress }) {
     <section ref={rootRef} className={styles.section} id="services" aria-labelledby="services-heading">
       <div className={styles.inner}>
         <p id="services-heading" className={styles.label}>
-          Our services:
+          We deliver end-to-end solutions built for scale and performance.
         </p>
         <ul className={`${styles.list} custom-services`}>
           {ITEMS.map((item) => (
