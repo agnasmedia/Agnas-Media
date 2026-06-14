@@ -5,18 +5,17 @@ import { Center } from '@react-three/drei'
 import { AlienMesh } from '../r3f/AlienModel'
 
 /**
- * Footer alien — scroll-driven Y (tuned to the CTA band at progress ≈ 0.5).
+ * Footer 3D creature (alien). ScrollTrigger on .ctaBand: progress=0.5 ≈ CTA centered.
  *
  *   progress 0.0 → 0.5 : Y from -9 → 0 (rises into CTA band).
  *   progress 0.5 → 1.0 : Y 0 → 3 (light parallax).
  */
-export function AlienScene({ progressRef }) {
+export function AlienScene({ progress }) {
   const root = useRef()
 
   useFrame(() => {
-    if (!root.current || !progressRef) return
-
-    const p = THREE.MathUtils.clamp(progressRef.current ?? 0, 0, 1)
+    if (!root.current) return
+    const p = THREE.MathUtils.clamp(progress, 0, 1)
 
     let y
     if (p < 0.5) {
@@ -29,11 +28,12 @@ export function AlienScene({ progressRef }) {
     }
 
     root.current.position.set(0, y, -1)
-    root.current.visible = p > 0
   })
 
+  const visible = progress > 0
+
   return (
-    <group ref={root} visible={false}>
+    <group ref={root} visible={visible}>
       <group scale={15} rotation={[0, 0.5, 0]} position={[0, 0.5, 0]}>
         <Center>
           <AlienMesh />

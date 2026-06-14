@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber'
-import { Environment, PerspectiveCamera, useGLTF, useProgress } from '@react-three/drei'
+import { Environment, PerspectiveCamera, useProgress } from '@react-three/drei'
 import { EffectComposer } from '@react-three/postprocessing'
 import { Fluid } from '@whatisjery/react-fluid-distortion'
 import { Suspense, useEffect, useState } from 'react'
@@ -37,14 +37,11 @@ export function SceneCanvas({
   heroProgress,
   showreelProgress,
   servicesProgress,
-  footerProgressRef,
+  footerProgress,
+  mountFooterModel,
   onSceneReady,
 }) {
   const reducedMotion = useReducedMotion()
-
-  useEffect(() => {
-    useGLTF.preload('/models/alien-transformed.glb')
-  }, [])
   // The canvas sits behind the DOM (.canvasLayer is pointer-events: none) so
   // we route R3F's pointer events through documentElement. That way the Fluid
   // distortion effect stays in sync with the cursor while DOM elements above
@@ -70,7 +67,7 @@ export function SceneCanvas({
           <ALogoScene progress={heroProgress} />
           <ShowreelPlane heroProgress={heroProgress} showreelProgress={showreelProgress} />
           <ServicesCloudsScene progress={servicesProgress} reducedMotion={reducedMotion} />
-          <AlienScene progressRef={footerProgressRef} />
+          {mountFooterModel ? <AlienScene progress={footerProgress} /> : null}
           {!reducedMotion ? (
             <EffectComposer>
               <Fluid

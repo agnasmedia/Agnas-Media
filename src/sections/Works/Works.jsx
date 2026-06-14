@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { WORKS } from '../../data/works'
+import { scheduleScrollTriggerRefresh } from '../../lib/scheduleScrollTriggerRefresh'
 import styles from './Works.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -113,6 +114,7 @@ function WorkCard({ work, index }) {
             alt=""
             loading="lazy"
             decoding="async"
+            onLoad={scheduleScrollTriggerRefresh}
             onError={(e) => {
               e.currentTarget.style.opacity = 0.35
             }}
@@ -155,6 +157,22 @@ export function Works() {
       if (mql.removeEventListener) mql.removeEventListener('change', onChange)
       else mql.removeListener(onChange)
     }
+  }, [])
+
+  // Auto-height work cards shift the footer; refresh ScrollTrigger after layout changes.
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return undefined
+
+    const refresh = () => scheduleScrollTriggerRefresh()
+    section.querySelectorAll('img').forEach((img) => {
+      if (img.complete) refresh()
+      else img.addEventListener('load', refresh, { once: true })
+    })
+
+    const ro = new ResizeObserver(refresh)
+    ro.observe(section)
+    return () => ro.disconnect()
   }, [])
 
   useEffect(
