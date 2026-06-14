@@ -20,6 +20,8 @@
     "postprocessing": "^6.35.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^7.17.0",
+    "resend": "^6.12.4",
     "three": "^0.164.1"
   },
   "devDependencies": {

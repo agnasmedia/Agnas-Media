@@ -1,0 +1,203 @@
+.modal {
+  --modal-pad-x: clamp(0.75rem, 4vw, 2.5rem);
+  --modal-pad-y: clamp(0.75rem, 3vh, 2rem);
+  --header-h: 2.75rem;
+  --panel-max-w: min(1200px, 92vw);
+  --panel-max-h: calc(100dvh - var(--modal-pad-y) * 2);
+  /* Fit 16:9 video + header inside viewport height */
+  --video-max-w-from-h: calc((var(--panel-max-h) - var(--header-h)) * 16 / 9);
+
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:
+    max(var(--modal-pad-y), env(safe-area-inset-top, 0px))
+    max(var(--modal-pad-x), env(safe-area-inset-right, 0px))
+    max(var(--modal-pad-y), env(safe-area-inset-bottom, 0px))
+    max(var(--modal-pad-x), env(safe-area-inset-left, 0px));
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(var(--panel-max-w), var(--video-max-w-from-h), 100%);
+  max-height: var(--panel-max-h);
+  opacity: 0;
+  transform: translateY(24px) scale(0.88);
+  will-change: transform, opacity;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: var(--header-h);
+  margin-bottom: clamp(0.5rem, 1.5vh, 0.85rem);
+  flex-shrink: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(0.72rem, 1.1vw, 0.85rem);
+  font-weight: var(--type-emphasis-weight);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--fg);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.close:hover,
+.close:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.frameWrap {
+  position: relative;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  max-height: calc(var(--panel-max-h) - var(--header-h) - 0.85rem);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #000;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .modal {
+    --panel-max-w: min(920px, 94vw);
+  }
+}
+
+/* Large desktops */
+@media (min-width: 1400px) {
+  .modal {
+    --panel-max-w: min(1280px, 88vw);
+  }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+  .modal {
+    --modal-pad-x: clamp(0.5rem, 3vw, 1rem);
+    --modal-pad-y: clamp(0.5rem, 2vh, 1rem);
+    --header-h: 2.5rem;
+    --panel-max-w: 100%;
+  }
+
+  .panel {
+    width: min(100%, var(--video-max-w-from-h));
+    max-height: calc(100dvh - var(--modal-pad-y) * 2 - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  }
+
+  .header {
+    margin-bottom: 0.5rem;
+  }
+
+  .title {
+    font-size: 0.7rem;
+  }
+
+  .close {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .frameWrap {
+    border-radius: 2px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .modal {
+    --header-h: 2.25rem;
+  }
+
+  .title {
+    max-width: 12rem;
+  }
+}
+
+/* Short viewports — landscape phones, small laptop windows */
+@media (max-height: 520px) and (orientation: landscape) {
+  .modal {
+    --modal-pad-y: 0.5rem;
+    --header-h: 2rem;
+    align-items: center;
+  }
+
+  .panel {
+    width: min(calc((100dvh - 1.5rem) * 16 / 9), 92vw, 1200px);
+  }
+
+  .header {
+    margin-bottom: 0.35rem;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .close {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .frameWrap {
+    max-height: calc(100dvh - var(--header-h) - 1.25rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transform: none;
+  }
+}

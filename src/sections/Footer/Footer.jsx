@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -11,35 +12,42 @@ gsap.registerPlugin(ScrollTrigger)
 
 const CONTACT = [
   {
-    heading: 'Heroes from Ukraine',
-    lines: ['Main Office', 'Dnipro, 49000'],
+    heading: 'Based in USA',
+    lines: ['162 Madison Ave', 'New York City, 10016 NY'],
+    mail: 'nyc@agnasmedia.com',
+  },
+  {
+    heading: 'Heroes from Singapore',
+    lines: ['63 Robinson Rd', '068894, Singapore'],
     mail: 'hello@agnasmedia.com',
   },
   {
-    heading: 'Based in USA',
-    lines: ['Los Angeles, 90210', 'California'],
-    mail: 'la@agnasmedia.com',
-  },
-  {
-    heading: 'Support from Poland',
-    lines: ['Main Office', 'Warsaw'],
-    mail: 'pl@agnasmedia.com',
+    heading: 'Support from Belgium',
+    lines: ['Av. Louise 200', 'Bruxelles, 1050, Belgium'],
+    mail: 'be@agnasmedia.com',
   },
 ]
 
 const SOCIAL = [
-  { label: 'Facebook', href: 'https://www.facebook.com/agnasmedia.com/' },
-  { label: 'Instagram', href: 'https://www.instagram.com/agnasmedia.com/' },
+  { label: 'Instagram', href: 'https://www.instagram.com/agnasmedia/' },
   { label: 'Dribbble', href: 'https://dribbble.com/agnasmedia' },
   { label: 'Behance', href: 'https://www.behance.net/agnasmedia' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/agnasmedia' },
 ]
 
-export function Footer({ onFooterProgress, onRequestFooterModel }) {
+export function Footer({
+  onFooterProgress,
+  onRequestFooterModel,
+  sceneSync = true,
+  showCta = true,
+  talkHref = '/contact',
+}) {
   const rootRef = useRef(null)
   const sentinalRef = useRef(null)
   const ctaBandRef = useRef(null)
 
   useEffect(() => {
+    if (!sceneSync) return undefined
     const el = sentinalRef.current
     if (!el) return undefined
 
@@ -56,11 +64,11 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
 
     io.observe(el)
     return () => io.disconnect()
-  }, [onRequestFooterModel])
+  }, [onRequestFooterModel, sceneSync])
 
   useGSAP(
     () => {
-      if (!ctaBandRef.current) return undefined
+      if (!sceneSync || !ctaBandRef.current) return undefined
 
       // Trigger off the CTA band itself so progress=0.5 corresponds to the
       // "Let's Talk" button being at the vertical center of the viewport.
@@ -78,29 +86,35 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
         st.kill()
       }
     },
-    { scope: rootRef, dependencies: [onFooterProgress] },
+    { scope: rootRef, dependencies: [onFooterProgress, sceneSync] },
   )
 
   return (
-    <footer ref={rootRef} className={styles.footer} id="contact">
+    <footer
+      ref={rootRef}
+      className={`${styles.footer} ${!showCta ? styles.footerCompact : ''}`}
+      id="contact"
+    >
       <span ref={sentinalRef} className={styles.sentinal} aria-hidden />
 
-      <div ref={ctaBandRef} className={styles.ctaBand}>
-        <div className={styles.marqueeLayer} aria-hidden>
-          <MarqueeStrip first="Let's talk" second="Contact us" />
+      {showCta ? (
+        <div ref={ctaBandRef} className={styles.ctaBand}>
+          <div className={styles.marqueeLayer} aria-hidden>
+            <MarqueeStrip first="Let's talk" second="Contact us" />
+          </div>
+          <div className={styles.ctaLayer}>
+            <MagneticButton className={styles.magnetic}>
+              <Link
+                className={styles.talkBtn}
+                to={talkHref}
+                data-cursor-text="Say hello"
+              >
+                Let&apos;s Talk
+              </Link>
+            </MagneticButton>
+          </div>
         </div>
-        <div className={styles.ctaLayer}>
-          <MagneticButton className={styles.magnetic}>
-            <a
-              className={styles.talkBtn}
-              href="mailto:hello@agnasmedia.com"
-              data-cursor-text="Say hello"
-            >
-              Let&apos;s Talk
-            </a>
-          </MagneticButton>
-        </div>
-      </div>
+      ) : null}
 
       <div className={styles.grid}>
         {CONTACT.map((col) => (
@@ -131,11 +145,14 @@ export function Footer({ onFooterProgress, onRequestFooterModel }) {
         </div>
 
         <div className={styles.col}>
-          <p className={styles.colHead}>Business inquiries</p>
-          <a className={styles.mail} href="mailto:hello@agnasmedia.com">
-            hello@agnasmedia.com
+          <p className={styles.colHead}>Business Inquiries</p>
+          <a className={styles.mail} href="mailto:howdy@agnasmedia.com">
+            howdy@agnasmedia.com
           </a>
-          <p className={styles.note}>agnasmedia.com</p>
+          <a className={styles.mail} href="tel:+19172591089">
+            +1 (917) 259-1089
+          </a>
+          <p className={styles.note}>Agnas® is a registered trademark of Wenkroy Inc.</p>
         </div>
       </div>
     </footer>

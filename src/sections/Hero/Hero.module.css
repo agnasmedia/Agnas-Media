@@ -5,27 +5,6 @@
   padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2.5rem) clamp(3rem, 10vh, 6rem);
 }
 
-.nav {
-  position: absolute;
-  top: clamp(1.5rem, 5vh, 3.5rem);
-  right: clamp(1rem, 4vw, 3rem);
-  display: flex;
-  gap: clamp(0.75rem, 2.5vw, 2rem);
-  font-size: clamp(1.04rem, 1.24vw, 1.24rem);
-  font-weight: var(--type-emphasis-weight);
-}
-
-.navLink {
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-
-.navLink:hover,
-.navLink:focus-visible {
-  color: var(--fg);
-}
-
 .title {
   margin: 0;
   padding-top: clamp(1.25rem, 4vh, 2.75rem);
@@ -34,10 +13,11 @@
 
 .line {
   display: block;
-  font-size: clamp(1.75rem, 3.7vw, 3.05rem);
+  font-size: 2em;
   font-weight: var(--type-display-weight);
   line-height: var(--type-display-leading);
   letter-spacing: var(--type-display-track);
+  width: 50vw;
 }
 
 .logoLine {
@@ -58,20 +38,22 @@
 .logoImg {
   display: block;
   width: auto;
-  max-width: min(42vw, 286px);
-  max-height: clamp(2.4rem, 5.5vw, 3.45rem);
   height: auto;
   flex: 0 1 auto;
-  min-width: 0;
+  min-width: 300px;
+  width: 30vw;
+  max-width: 500px;
   object-fit: contain;
   object-position: left center;
+  margin-left: -12px;
 }
 
 .reg {
   flex-shrink: 0;
   align-self: flex-start;
   margin-top: 0.08em;
-  font-size: 0.42em;
+  font-size: 0.9em;
+  margin-left: -0.2em;
   font-weight: var(--type-display-weight);
   line-height: 1;
 }
@@ -92,25 +74,22 @@
 }
 
 @media (max-width: 768px) {
-  .nav {
-    position: relative;
-    top: auto;
-    right: auto;
-    justify-content: flex-end;
-    margin-bottom: 1.5rem;
-  }
-
   .title {
     max-width: 100%;
+    padding-top: 10px;
   }
 
   .line {
-    font-size: clamp(1.6rem, 5.2vw, 2.4rem);
+    font-size: 1.5em;
+    width: 90vw;
   }
 
   .logoImg {
-    max-width: min(58vw, 260px);
-    max-height: clamp(2.15rem, 7vw, 2.85rem);
+    width: 70vw;
+    max-width: 100%;
+    min-width: 200px;
+    max-height: auto;
+    margin-left: -8px;
   }
 
   .intro {
@@ -118,7 +97,7 @@
     left: auto;
     right: auto;
     bottom: auto;
-    margin-top: 2rem;
+    margin-top: calc(100vh - 80vh);
     margin-left: 0;
     max-width: 100%;
     font-size: clamp(1.05rem, 3.2vw, 1.2rem);

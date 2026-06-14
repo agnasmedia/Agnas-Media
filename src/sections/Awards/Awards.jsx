@@ -14,8 +14,8 @@ export function Awards() {
           Awards and recognition
         </h2>
         <p className={styles.lead}>
-          We are proud to be the 2019 &quot;Studio of the Year&quot; at the CSS Design Awards. Our project was
-          also honored as &quot;E-Commerce of the Year&quot; by the Awwwards in 2022.
+          We are proud to be the 2024 &quot;Studio of the Year&quot; at the CSS Design Awards. Our project was
+          also honored as &quot;E-Commerce of the Year&quot; by the Awwwards.
         </p>
 
         <div className={styles.columns}>

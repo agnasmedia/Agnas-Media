@@ -27,7 +27,7 @@ export const AWARD_BLOCKS = [
   },
   {
     id: 'fwa',
-    label: 'the FWA',
+    label: 'The FWA',
     total: 4,
     rows: [
       { label: 'FWA of The Day', value: 1 },

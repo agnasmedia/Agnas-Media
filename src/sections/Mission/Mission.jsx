@@ -3,12 +3,28 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import MagneticButton from '../../components/MagneticButton'
+import { useLenis } from '../../lib/useLenis'
+import { getSectionIdFromHref, scrollToSection } from '../../lib/scrollToSection'
 import styles from './Mission.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
+function isExternalLink(href) {
+  return /^https?:\/\//i.test(href)
+}
+
 export function Mission({ id, quote, aside, linkHref, linkLabel }) {
   const rootRef = useRef(null)
+  const { lenis } = useLenis()
+  const external = isExternalLink(linkHref)
+
+  const handleLinkClick = (event) => {
+    if (external) return
+
+    event.preventDefault()
+    const sectionId = getSectionIdFromHref(linkHref)
+    scrollToSection(sectionId, lenis)
+  }
 
   useGSAP(
     () => {
@@ -34,6 +50,10 @@ export function Mission({ id, quote, aside, linkHref, linkLabel }) {
     { scope: rootRef },
   )
 
+  const linkProps = external
+    ? { href: linkHref, target: '_blank', rel: 'noreferrer noopener' }
+    : { href: linkHref, onClick: handleLinkClick }
+
   return (
     <section ref={rootRef} className={styles.section} id={id}>
       <div className={styles.inner}>
@@ -45,9 +65,7 @@ export function Mission({ id, quote, aside, linkHref, linkLabel }) {
           <MagneticButton className={styles.magnetic}>
             <a
               className={styles.circleBtn}
-              href={linkHref}
-              target="_blank"
-              rel="noreferrer noopener"
+              {...linkProps}
               aria-label={linkLabel}
               data-mission-arrow
             >
@@ -57,7 +75,7 @@ export function Mission({ id, quote, aside, linkHref, linkLabel }) {
 
           <div className={styles.copy}>
             <p className={styles.body}>{aside}</p>
-            <a className={styles.link} href={linkHref} target="_blank" rel="noreferrer noopener">
+            <a className={styles.link} {...linkProps}>
               {linkLabel}
             </a>
           </div>

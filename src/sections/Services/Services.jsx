@@ -6,7 +6,7 @@ import styles from './Services.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const ITEMS = ['UX Strategy', 'UI Design', 'Development', 'Communication']
+const ITEMS = ['UI/UX Design & Strategy', 'Art Direction', 'Web & Mobile Design', 'Content Production', 'Motion Design', 'Branding & Packaging', 'Social & Brand PR', 'Front-End & Back-End Development']
 
 export function Services({ onServicesProgress }) {
   const rootRef = useRef(null)
@@ -53,9 +53,9 @@ export function Services({ onServicesProgress }) {
     <section ref={rootRef} className={styles.section} id="services" aria-labelledby="services-heading">
       <div className={styles.inner}>
         <p id="services-heading" className={styles.label}>
-          Our services:
+          We deliver end-to-end solutions built for scale and performance.
         </p>
-        <ul className={styles.list}>
+        <ul className={`${styles.list} custom-services`}>
           {ITEMS.map((item) => (
             <li key={item} data-service-line className={styles.line}>
               {item}

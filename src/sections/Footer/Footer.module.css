@@ -6,6 +6,11 @@
   flex-direction: column;
 }
 
+.footerCompact {
+  min-height: auto;
+  padding-top: clamp(2rem, 6vh, 4rem);
+}
+
 .sentinal {
   position: absolute;
   top: -40vh;
@@ -140,4 +145,15 @@
 .note {
   margin: 0.75rem 0 0;
   color: var(--muted);
+  font-size: 0.8em;
+}
+
+
+@media (max-width: 768px) {
+  .mail{
+    margin-right: 10px;
+  }
+  .colHead{
+    margin-bottom: 0.6rem;
+  }
 }
