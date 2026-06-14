@@ -1,0 +1,42 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.35),
+    0 2px 8px rgba(0, 0, 0, 0.35);
+  transform-origin: center center;
+}
+
+.label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .root {
+    display: none;
+  }
+}

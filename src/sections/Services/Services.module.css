@@ -1,0 +1,39 @@
+.section {
+  padding: clamp(4rem, 14vh, 10rem) clamp(1rem, 6vw, 6rem);
+}
+
+.inner {
+  max-width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.label {
+  margin: 0 0 1.5rem;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-emphasis-weight);
+  line-height: var(--type-body-leading);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.line {
+  font-size: clamp(2.8rem, 9vw, 7rem);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-track);
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.line + .line {
+  margin-top: 0.12em;
+}
+
+.line:nth-child(even) {
+  font-style: italic;
+  font-weight: 500;
+}

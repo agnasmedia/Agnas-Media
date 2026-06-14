@@ -1,77 +1,31 @@
-import React from 'react'
-import { Canvas, useThree } from '@react-three/fiber'
-import { Html, OrbitControls, Preload, Scroll, ScrollControls, Text } from '@react-three/drei'
-import { EffectComposer } from '@react-three/postprocessing'
-import { Fluid } from '@whatisjery/react-fluid-distortion'
+import { useEffect } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { LenisProvider } from './lib/LenisProvider'
+import { CustomCursor } from './components/CustomCursor'
+import { HomePage } from './pages/HomePage'
+import { ContactPage } from './pages/ContactPage'
+import './styles/global.css'
+import './styles/fonts.css'
 
-import { Route } from "wouter"
+gsap.registerPlugin(ScrollTrigger)
 
-import LandingPage from './components/LandingPage'
-import Portfolio from './components/Portfolio'
-import Agency from './components/Agency'
-import Contact from './components/Contact'
+export default function App() {
+  const location = useLocation()
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    ScrollTrigger.refresh()
+  }, [location.pathname])
 
-import "./App.css"
-
-import { Cursor } from 'react-creative-cursor';
-import 'react-creative-cursor/dist/styles.css';
-
-
-function App() {
   return (
-    <>
-          <Cursor cursorSize={0.1} cursorBackgrounColor="#c24040" />
-          <Canvas 
-          className='canvas'
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            height: '100%',
-            width: '100%',
-            background: 'black',
-            // touchAction: 'auto !important'
-          }}>
-              <EffectComposer>
-                      <Fluid
-                          radius={0.5}
-                          curl={4.9}
-                          swirl={4}
-                          distortion={0.40}
-                          force={1.1}
-                          pressure={0.80}
-                          densityDissipation={0.96}
-                          velocityDissipation={1.0}
-                          intensity={2}
-                          rainbow={true}
-                          blend={5.0}
-                          showBackground={true}
-                          backgroundColor='#000000'
-                      />
-                  </EffectComposer>
-
-                <Route path="/">
-                  <LandingPage />
-                </Route>
-
-                <Route path="/portfolio">
-                  <Portfolio />
-                </Route>
-
-                <Route path="/agency">
-                  <Agency />
-                </Route>
-
-                <Route path="/contact-us">
-                  <Contact />
-                </Route>
-                
-
-                <Preload />
-          </Canvas>
-    </>
+    <LenisProvider>
+      <CustomCursor />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+    </LenisProvider>
   )
 }
-
-export default App

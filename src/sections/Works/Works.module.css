@@ -1,0 +1,212 @@
+.section {
+  position: relative;
+  padding: clamp(4rem, 12vh, 8rem) clamp(1rem, 5vw, 4rem) clamp(6rem, 16vh, 12rem);
+  isolation: isolate;
+  --ribbon-opacity: 0;
+}
+
+.heading {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto clamp(3rem, 8vh, 6rem);
+  text-align: center;
+  font-size: clamp(2.5rem, 9vw, 10.3rem);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-track);
+}
+
+.grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  justify-items: center;
+}
+
+/* Stroke ribbon styling */
+
+.ribbonLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  opacity: var(--ribbon-opacity);
+  mix-blend-mode: screen;
+}
+
+.ribbonGlow,
+.ribbonBody,
+.ribbonCore {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.ribbonGlow {
+  /* stroke: rgba(194, 64, 64, 0.42); */
+  stroke-width: clamp(28px, 5vw, 62px);
+  filter: url('#works-ribbon-glow');
+  opacity: 0.44;
+}
+
+.ribbonBody {
+  stroke: #c24040;
+  /* stroke-width: clamp(14px, 2.6vw, 34px); */
+  filter: url('#works-ribbon-glow');
+  opacity: 0.86;
+}
+
+.ribbonCore {
+  stroke: #c24040;
+  stroke-width: clamp(2px, 1vw, 3px);
+  opacity: 0.7;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: min(100%, 300px);
+  padding-top: clamp(3.5rem, 8.4vh, 7rem);
+  padding-bottom: clamp(3.5rem, 8.4vh, 7rem);
+  box-sizing: border-box;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: min(88vw, 300px);
+  order: var(--order);
+}
+
+.cardLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardLink:hover,
+.cardLink:focus-visible {
+  transform: translateY(-26px);
+}
+
+.thumb {
+  overflow: hidden;
+  background: #111;
+}
+
+/* Slightly different heights per track so card tops/bottoms don’t line up across columns. */
+.track0 .thumb {
+  /* height: min(49vh, 384px); */
+  height: auto;
+}
+
+.track1 .thumb {
+  /* height: min(54vh, 418px); */
+  height: auto;
+}
+
+.track2 .thumb {
+  /* height: min(51vh, 396px); */
+  height: auto;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.meta {
+  padding: 1rem 0.25rem 0;
+}
+
+.title {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 3vw, 2.2rem);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-track);
+}
+
+.sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.year {
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 960px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(2.5rem, 8vh, 4rem);
+  }
+
+  .column {
+    display: contents;
+    max-width: none;
+  }
+
+  .card {
+    max-width: none;
+    margin-top: 0 !important;
+  }
+
+  .cardLink:hover,
+  .cardLink:focus-visible {
+    transform: none;
+  }
+
+  .track0 .thumb,
+  .track1 .thumb,
+  .track2 .thumb {
+    /* height: min(62vh, 480px); */
+    height: auto;
+  }
+
+  .title {
+    font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+  }
+
+  .sub {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+  }
+
+  .ribbonGlow {
+    stroke-width: clamp(24px, 9vw, 48px);
+  }
+
+  .ribbonBody {
+    stroke-width: clamp(12px, 5vw, 28px);
+  }
+}
+
+@media (max-width: 768px) {
+  .ribbonLayer {
+    display: none;
+  }
+}

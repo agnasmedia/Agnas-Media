@@ -1,0 +1,41 @@
+.wrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: marquee 36s linear infinite;
+  will-change: transform;
+}
+
+.half {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.span {
+  display: inline-block;
+  margin-right: 3rem;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-track);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    transform: translateX(0);
+  }
+}

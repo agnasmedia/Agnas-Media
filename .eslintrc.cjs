@@ -7,15 +7,24 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'src.legacy'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
     'react/jsx-no-target-blank': 'off',
+    'react/prop-types': 'off',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
   },
+  overrides: [
+    {
+      files: ['src/r3f/**/*.{js,jsx}', 'src/scene/**/*.{js,jsx}'],
+      rules: {
+        'react/no-unknown-property': 'off',
+      },
+    },
+  ],
 }

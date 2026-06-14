@@ -1,0 +1,107 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2.5rem) clamp(3rem, 10vh, 6rem);
+}
+
+.title {
+  margin: 0;
+  padding-top: clamp(1.25rem, 4vh, 2.75rem);
+  max-width: min(92vw, 832px);
+}
+
+.line {
+  display: block;
+  font-size: 2em;
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-track);
+  width: 50vw;
+}
+
+.logoLine {
+  line-height: 1;
+  margin-bottom: 0.15em;
+}
+
+/* Keep wordmark + ® on one line; image can shrink before the mark wraps. */
+.logoLockup {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: clamp(0.06em, 0.35vw, 0.12em);
+  max-width: 100%;
+}
+
+.logoImg {
+  display: block;
+  width: auto;
+  height: auto;
+  flex: 0 1 auto;
+  min-width: 300px;
+  width: 30vw;
+  max-width: 500px;
+  object-fit: contain;
+  object-position: left center;
+  margin-left: -12px;
+}
+
+.reg {
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 0.08em;
+  font-size: 0.9em;
+  margin-left: -0.2em;
+  font-weight: var(--type-display-weight);
+  line-height: 1;
+}
+
+.intro {
+  position: absolute;
+  left: auto;
+  right: clamp(1rem, 8vw, 10vw);
+  bottom: clamp(4rem, 12vh, 8rem);
+  max-width: min(546px, 88vw);
+  margin: 0;
+  margin-left: auto;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+  text-align: right;
+  color: var(--fg);
+  font-weight: var(--type-body-weight);
+}
+
+@media (max-width: 768px) {
+  .title {
+    max-width: 100%;
+    padding-top: 10px;
+  }
+
+  .line {
+    font-size: 1.5em;
+    width: 90vw;
+  }
+
+  .logoImg {
+    width: 70vw;
+    max-width: 100%;
+    min-width: 200px;
+    max-height: auto;
+    margin-left: -8px;
+  }
+
+  .intro {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin-top: calc(100vh - 80vh);
+    margin-left: 0;
+    max-width: 100%;
+    font-size: clamp(1.05rem, 3.2vw, 1.2rem);
+    text-align: left;
+    color: var(--fg);
+  }
+}

@@ -1,0 +1,109 @@
+.section {
+  padding: clamp(4rem, 12vh, 9rem) clamp(1rem, 6vw, 6rem);
+  padding-top: clamp(11.7rem, 35.1vh, 26.325rem);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2.5rem, 6vh, 4rem);
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.quote {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.5vw, 3.6rem);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-track);
+  max-width: min(38ch, 100%);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.magnetic {
+  flex-shrink: 0;
+}
+
+.circleBtn {
+  width: clamp(5rem, 12vw, 12rem);
+  height: clamp(5rem, 12vw, 12rem);
+  border-radius: 50%;
+  border: 2px solid var(--fg);
+  background: transparent;
+  color: var(--fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.circleBtn:hover,
+.circleBtn:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.circleBtn:hover .arrow,
+.circleBtn:focus-visible .arrow {
+  stroke: var(--bg);
+}
+
+.copy {
+  flex: 0 1 auto;
+  min-width: min(100%, 280px);
+  max-width: 520px;
+  text-align: center;
+}
+
+.body {
+  margin: 0 0 1.5rem;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.link {
+  display: inline-block;
+  font-size: var(--type-body-size);
+  font-weight: var(--type-emphasis-weight);
+  line-height: var(--type-body-leading);
+  text-decoration: none;
+  text-underline-offset: 0.2em;
+  color: var(--fg);
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 100;
+  border-bottom: 1px solid var(--fg);
+}
+
+.link:hover{
+  border-bottom: 1px solid var(--fg);
+}
+
+@media (max-width: 600px) {
+  .bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+}
