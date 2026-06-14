@@ -4,6 +4,7 @@ import styles from './ContactForm.module.css'
 
 const INITIAL = {
   name: '',
+  countryCode: '',
   phone: '',
   email: '',
   location: '',
@@ -11,18 +12,10 @@ const INITIAL = {
   company: '',
 }
 
-const COUNTRY_CODES = [
-  { value: '+1', label: '+1' },
-  { value: '+44', label: '+44' },
-  { value: '+65', label: '+65' },
-  { value: '+32', label: '+32' },
-  { value: '+91', label: '+91' },
-  { value: '+971', label: '+971' },
-]
+const PHONE_PREFIX = '+'
 
 export function ContactForm() {
   const [form, setForm] = useState(INITIAL)
-  const [countryCode, setCountryCode] = useState('+1')
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState('')
 
@@ -30,9 +23,13 @@ export function ContactForm() {
     setForm((current) => ({ ...current, [field]: event.target.value }))
   }
 
+  const updateCountryCode = (event) => {
+    const digits = event.target.value.replace(/\D/g, '')
+    setForm((current) => ({ ...current, countryCode: digits }))
+  }
+
   const resetForm = () => {
     setForm(INITIAL)
-    setCountryCode('+1')
     setStatus('idle')
     setError('')
   }
@@ -42,13 +39,20 @@ export function ContactForm() {
     setStatus('sending')
     setError('')
 
+    const code = form.countryCode.trim()
+    if (!code) {
+      setStatus('idle')
+      setError('Please enter a country code.')
+      return
+    }
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
-          phone: `${countryCode} ${form.phone}`.trim(),
+          phone: `${PHONE_PREFIX}${code} ${form.phone}`.trim(),
         }),
       })
 
@@ -71,10 +75,10 @@ export function ContactForm() {
         <div className={styles.inner}>
           <div className={styles.success}>
             <p id="contact-success" className={styles.successText}>
-              Yeah! Your letter is already in our priority mailbox, they will contact you very soon!
+              Yeah! Thanks for reaching out, we'll get back to you as soon as possible.
             </p>
-            <button type="button" className={styles.resetBtn} onClick={resetForm}>
-              Send again
+            <button type="button" className={styles.resetBtn} onClick={() => window.location.href = '/'}>
+              Take me back to the home
             </button>
           </div>
         </div>
@@ -86,7 +90,7 @@ export function ContactForm() {
     <section className={styles.contact} aria-labelledby="contact-heading">
       <div className={styles.inner}>
         <h1 id="contact-heading" className={styles.heading}>
-          Hello there! We're so excited you found us. Tell us a bit about the project you have in mind!
+          Hello there! We&apos;re so excited you found us. Tell us a bit about the project you have in mind!
         </h1>
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -120,18 +124,23 @@ export function ContactForm() {
             <div className={styles.field}>
               <span className={styles.label}>Phone:</span>
               <div className={styles.phoneRow}>
-                <select
-                  className={styles.select}
-                  value={countryCode}
-                  onChange={(event) => setCountryCode(event.target.value)}
-                  aria-label="Country code"
-                >
-                  {COUNTRY_CODES.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                <div className={styles.codeField}>
+                  <span className={styles.codePrefix} aria-hidden>
+                    {PHONE_PREFIX}
+                  </span>
+                  <input
+                    className={styles.codeInput}
+                    type="tel"
+                    inputMode="numeric"
+                    name="countryCode"
+                    value={form.countryCode}
+                    onChange={updateCountryCode}
+                    placeholder="1"
+                    required
+                    aria-label="Country code"
+                    autoComplete="tel-country-code"
+                  />
+                </div>
                 <input
                   className={styles.input}
                   type="tel"

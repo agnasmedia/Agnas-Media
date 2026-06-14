@@ -51,8 +51,7 @@
 }
 
 .input,
-.textarea,
-.select {
+.textarea {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 2px;
@@ -71,8 +70,7 @@
 }
 
 .input:focus-visible,
-.textarea:focus-visible,
-.select:focus-visible {
+.textarea:focus-visible {
   outline: none;
   border-color: rgba(255, 255, 255, 0.45);
   background: rgba(255, 255, 255, 0.09);
@@ -85,13 +83,54 @@
 
 .phoneRow {
   display: grid;
-  grid-template-columns: minmax(5.5rem, 7rem) minmax(0, 1fr);
+  grid-template-columns: minmax(5.5rem, 7.5rem) minmax(0, 1fr);
   gap: 0.65rem;
 }
 
-.select {
-  appearance: none;
-  cursor: pointer;
+.codeField {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.codeField:focus-within {
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.codePrefix {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding-left: 1rem;
+  color: var(--fg);
+  font-size: clamp(0.95rem, 1.05vw, 1rem);
+  line-height: 1.4;
+  user-select: none;
+}
+
+.codeInput {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: clamp(0.95rem, 1.05vw, 1rem);
+  line-height: 1.4;
+  padding: 0.85rem 0.75rem 0.85rem 0.35rem;
+}
+
+.codeInput::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.codeInput:focus-visible {
+  outline: none;
 }
 
 .actions {
