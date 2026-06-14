@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SceneCanvas } from '../scene/SceneCanvas'
@@ -17,8 +17,7 @@ export function HomePage() {
   const [heroProgress, setHeroProgress] = useState(0)
   const [showreelProgress, setShowreelProgress] = useState(0)
   const [servicesProgress, setServicesProgress] = useState(0)
-  const [footerProgress, setFooterProgress] = useState(0)
-  const [mountFooterModel, setMountFooterModel] = useState(false)
+  const footerProgressRef = useRef(0)
   const [sceneReady, setSceneReady] = useState(false)
 
   const onHeroProgress = useCallback((v) => {
@@ -34,7 +33,7 @@ export function HomePage() {
   }, [])
 
   const onFooterProgress = useCallback((v) => {
-    setFooterProgress(v)
+    footerProgressRef.current = v
   }, [])
 
   const onSceneReady = useCallback(() => {
@@ -62,8 +61,7 @@ export function HomePage() {
         heroProgress={heroProgress}
         showreelProgress={showreelProgress}
         servicesProgress={servicesProgress}
-        footerProgress={footerProgress}
-        mountFooterModel={mountFooterModel}
+        footerProgressRef={footerProgressRef}
         onSceneReady={onSceneReady}
       />
       <div className={`mainSurface ${styles.main}`}>
@@ -96,11 +94,7 @@ export function HomePage() {
         />
         <Works />
         <Awards />
-        <Footer
-          onFooterProgress={onFooterProgress}
-          onRequestFooterModel={() => setMountFooterModel(true)}
-          talkHref="/contact"
-        />
+        <Footer onFooterProgress={onFooterProgress} talkHref="/contact" />
       </div>
     </>
   )

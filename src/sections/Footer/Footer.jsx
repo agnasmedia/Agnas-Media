@@ -1,14 +1,15 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGLTF } from '@react-three/drei'
 import MagneticButton from '../../components/MagneticButton'
 import { MarqueeStrip } from '../../components/MarqueeStrip'
 import styles from './Footer.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
+
+export const FOOTER_CTA_SCROLL_ID = 'footer-cta-pin'
 
 const CONTACT = [
   {
@@ -37,50 +38,38 @@ const SOCIAL = [
 
 export function Footer({
   onFooterProgress,
-  onRequestFooterModel,
   sceneSync = true,
   showCta = true,
   talkHref = '/contact',
 }) {
   const rootRef = useRef(null)
-  const sentinalRef = useRef(null)
   const ctaBandRef = useRef(null)
-
-  useEffect(() => {
-    if (!sceneSync) return undefined
-    const el = sentinalRef.current
-    if (!el) return undefined
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          useGLTF.preload('/models/alien-transformed.glb')
-          onRequestFooterModel?.()
-          io.disconnect()
-        }
-      },
-      { rootMargin: '320px 0px', threshold: 0 },
-    )
-
-    io.observe(el)
-    return () => io.disconnect()
-  }, [onRequestFooterModel, sceneSync])
 
   useGSAP(
     () => {
       if (!sceneSync || !ctaBandRef.current) return undefined
 
-      // Trigger off the CTA band itself so progress=0.5 corresponds to the
-      // "Let's Talk" button being at the vertical center of the viewport.
+      const sync = (progress) => {
+        onFooterProgress?.(progress)
+      }
+
+      // progress=0.5 ≈ CTA band centered in the viewport (Let's Talk aligned).
       const st = ScrollTrigger.create({
+        id: FOOTER_CTA_SCROLL_ID,
         trigger: ctaBandRef.current,
         start: 'top bottom',
         end: 'bottom top',
         scrub: true,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
-          onFooterProgress?.(self.progress)
+          sync(self.progress)
+        },
+        onRefresh: (self) => {
+          sync(self.progress)
         },
       })
+
+      sync(st.progress)
 
       return () => {
         st.kill()
@@ -95,8 +84,6 @@ export function Footer({
       className={`${styles.footer} ${!showCta ? styles.footerCompact : ''}`}
       id="contact"
     >
-      <span ref={sentinalRef} className={styles.sentinal} aria-hidden />
-
       {showCta ? (
         <div ref={ctaBandRef} className={styles.ctaBand}>
           <div className={styles.marqueeLayer} aria-hidden>
